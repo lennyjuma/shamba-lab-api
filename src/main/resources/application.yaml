@@ -11,6 +11,8 @@ server:
 #logging:git
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
   application:
     name:lab
   jackson:
