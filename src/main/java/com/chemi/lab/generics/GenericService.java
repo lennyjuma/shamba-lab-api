@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public abstract class GenericService<T extends GenericEntity <T>> {
 
     private final GenericRepository<T> repository;
@@ -12,8 +14,8 @@ public abstract class GenericService<T extends GenericEntity <T>> {
         this.repository = repository;
     }
 
-    public Page<T> getPage(Pageable pageable){
-        return repository.findAll(pageable);
+    public List<T> getPage(){
+        return repository.findAll();
     }
 
     public T get(String id){

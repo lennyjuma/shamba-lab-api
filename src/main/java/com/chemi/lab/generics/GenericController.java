@@ -1,5 +1,6 @@
 package com.chemi.lab.generics;
 
+import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 public abstract class GenericController<T extends GenericEntity<T>> {
     private final GenericService<T> service;
 
@@ -18,8 +21,8 @@ public abstract class GenericController<T extends GenericEntity<T>> {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<T>> getPage(Pageable pageable){
-        return ResponseEntity.ok(service.getPage(pageable));
+    public ResponseEntity<List<T>> getPage( ){
+        return ResponseEntity.ok(service.getPage());
     }
 
     @GetMapping("/{id}")

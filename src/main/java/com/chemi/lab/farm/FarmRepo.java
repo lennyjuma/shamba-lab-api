@@ -1,4 +1,6 @@
 package com.chemi.lab.farm;
 
-public class FarmRepo {
+import com.chemi.lab.generics.GenericRepository;
+
+public interface FarmRepo extends GenericRepository<Farm> {
 }

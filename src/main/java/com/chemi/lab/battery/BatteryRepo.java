@@ -1,4 +1,6 @@
 package com.chemi.lab.battery;
 
-public class BatteryRepo {
+import com.chemi.lab.generics.GenericRepository;
+
+public interface BatteryRepo extends GenericRepository<Battery> {
 }

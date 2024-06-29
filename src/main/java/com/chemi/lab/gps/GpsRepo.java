@@ -1,4 +1,6 @@
 package com.chemi.lab.gps;
 
-public class GpsRepo {
+import com.chemi.lab.generics.GenericRepository;
+
+public interface GpsRepo extends GenericRepository<Gps> {
 }

@@ -8,7 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/air")
 public class AirController extends GenericController<Air> {
-    public AirController(AirRepo repository) {
+
+    private final AirService airService;
+
+    public AirController(AirRepo repository, AirService airService) {
         super(repository);
+        this.airService = airService;
     }
+
+
+
+
+
 }

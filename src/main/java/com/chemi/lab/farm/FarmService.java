@@ -1,4 +1,10 @@
 package com.chemi.lab.farm;
 
-public class FarmService {
+import com.chemi.lab.generics.GenericRepository;
+import com.chemi.lab.generics.GenericService;
+
+public class FarmService extends GenericService<Farm> {
+    public FarmService(GenericRepository<Farm> repository) {
+        super(repository);
+    }
 }
