@@ -1,6 +1,6 @@
 package com.chemi.lab.generics;
 
-public interface GenericEntity <T>{
+public interface GenericEntity <T> {
 
     // update current instance with provided data
     void update(T source);
