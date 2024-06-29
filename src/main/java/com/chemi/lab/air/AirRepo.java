@@ -1,4 +1,6 @@
 package com.chemi.lab.air;
 
-public class AirRepo {
+import com.chemi.lab.generics.GenericRepository;
+
+public interface AirRepo extends GenericRepository<Air> {
 }

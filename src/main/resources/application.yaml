@@ -1,1 +1,38 @@
-spring.application.name=lab
+server:
+  port: 8081
+
+#keycloak:
+#  realm: master
+#  auth-server-url: http://truby.me.com/auth
+#  resource: bb6-js
+#  public-client: true
+#  bearer-only: true
+
+#logging:git
+
+spring:
+  application:
+    name:lab
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/shamba_lab
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  #    show-sql: true
+  logging:
+    level:
+      root: debug
+      web: debug
+
+
+app:
+  jwtSecret: 'WamlambezWamnyonyez'
+  jwtExpirationInMs: 60000000
