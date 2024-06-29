@@ -1,0 +1,13 @@
+version: "2"
+services:
+  block_buster_mysql_jar:
+    image: mysql:5.7.36
+    container_name: shamba_lab_sql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=shamba_lab
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d/
+      - ./conf:/etc/mysql/conf.dC
