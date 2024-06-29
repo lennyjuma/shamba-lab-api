@@ -10,30 +10,7 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic startSTKFromMQTTTopic(){
-        return TopicBuilder.name("start_stk_from_mqtt").build();
-    }
-    @Bean
-    public NewTopic ackSTKTopic(){
-        return TopicBuilder.name("ack_stk").build();
-    }@Bean
-    public NewTopic ackSTKToMqttTopic(){
-        return TopicBuilder.name("ack_stk_mqtt").build();
-    }
-    @Bean
-    public NewTopic resultSTKTopic(){
-        return TopicBuilder.name("result_stk").build();
-    }
-    @Bean
-    public NewTopic resultSTKToMqttTopic(){
-        return TopicBuilder.name("result_stk_mqtt").build();
-    }
-    @Bean
-    public NewTopic reversalPayloadFromChemichemi(){
-        return TopicBuilder.name("reversal_payload_chemichemi").build();
-    }
-    @Bean
     public NewTopic lennyTopic(){
-        return TopicBuilder.name("test").build();
+        return TopicBuilder.name("shamba_lab").build();
     }
 }
