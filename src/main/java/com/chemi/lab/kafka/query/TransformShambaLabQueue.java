@@ -12,10 +12,12 @@ import com.chemi.lab.soil.SoilService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 @RequiredArgsConstructor
 public class TransformShambaLabQueue {
 
@@ -46,7 +48,7 @@ public class TransformShambaLabQueue {
     private static Air getAir(Map<String, Map<String, String>> shamba_lab) {
         Air air = new Air();
         air.setHumidity(shamba_lab.get("Air").get("Humidity"));
-        air.setHumidity(shamba_lab.get("Temperature").get("Temperature"));
+        air.setTemperature(shamba_lab.get("Air").get("Temperature"));
         return air;
     }
     private static Gps getGps(Map<String, Map<String, String>> shamba_lab) {
@@ -62,11 +64,11 @@ public class TransformShambaLabQueue {
         Soil soil = new Soil();
         soil.setNitrogen(shamba_lab.get("Soil").get("Nitrogen"));
         soil.setPhosphorous(shamba_lab.get("Soil").get("Phosphorous"));
-        soil.setPhosphorous(shamba_lab.get("Soil").get("Potassium"));
-        soil.setPhosphorous(shamba_lab.get("Soil").get("Conductivity"));
-        soil.setPhosphorous(shamba_lab.get("Soil").get("Moisture"));
-        soil.setPhosphorous(shamba_lab.get("Soil").get("Temperature"));
-        soil.setPhosphorous(shamba_lab.get("Soil").get("pH"));
+        soil.setPotassium(shamba_lab.get("Soil").get("Potassium"));
+        soil.setConductivity(shamba_lab.get("Soil").get("Conductivity"));
+        soil.setConductivity(shamba_lab.get("Soil").get("Moisture"));
+        soil.setTemperature(shamba_lab.get("Soil").get("Temperature"));
+        soil.setPH(shamba_lab.get("Soil").get("pH"));
         return soil;
     }
     private static Farm getFarm(Map<String, Map<String, String>> shamba_lab) {
