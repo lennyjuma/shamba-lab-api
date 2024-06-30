@@ -22,12 +22,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class TransformShambaLabQueue {
-
-    private final AirService airService;
-    private final FarmService farmService;
-    private final BatteryService batteryService;
-    private final GpsService gpsService;
-    private final SoilService soilService;
+    private final BatteryService batteryService;;
     private final ShambaLabService shambaLabService;
 
     public void transformShambaLabQueue(String queueMessage) {
@@ -47,11 +42,6 @@ public class TransformShambaLabQueue {
             shambaLab.setFarm(farm);
 
             shambaLabService.create(shambaLab);
-
-//            airService.create(air);
-//            farmService.create(farm);
-//            gpsService.create(gps);
-//            soilService.create(soil);
 
         }catch (Exception e){
             e.printStackTrace();
