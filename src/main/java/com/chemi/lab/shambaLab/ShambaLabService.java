@@ -1,13 +1,12 @@
-package com.chemi.lab.soil;
+package com.chemi.lab.shambaLab;
 
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.generics.GenericService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SoilService extends GenericService<Soil> {
-    public SoilService(GenericRepository<Soil> repository) {
+public class ShambaLabService extends GenericService<ShambaLab> {
+    public ShambaLabService(GenericRepository<ShambaLab> repository) {
         super(repository);
     }
-
 }

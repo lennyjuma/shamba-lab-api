@@ -2,8 +2,11 @@ package com.chemi.lab.farm;
 
 
 import com.chemi.lab.generics.GenericEntity;
+import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +23,9 @@ public class Farm extends PriKey  implements Serializable, GenericEntity<Farm> {
     private String crop;
     private String phone;
     private String deviceID;
+    @JsonIgnore
+    @OneToOne(mappedBy = "farm")
+    private ShambaLab shambaLab;
 
     @Override
     public void update(Farm source) {

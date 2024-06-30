@@ -7,6 +7,8 @@ import com.chemi.lab.farm.Farm;
 import com.chemi.lab.farm.FarmService;
 import com.chemi.lab.gps.Gps;
 import com.chemi.lab.gps.GpsService;
+import com.chemi.lab.shambaLab.ShambaLab;
+import com.chemi.lab.shambaLab.ShambaLabService;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.soil.SoilService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,6 +28,7 @@ public class TransformShambaLabQueue {
     private final BatteryService batteryService;
     private final GpsService gpsService;
     private final SoilService soilService;
+    private final ShambaLabService shambaLabService;
 
     public void transformShambaLabQueue(String queueMessage) {
         Map<String,Map<String,String>> shamba_lab = new HashMap<>();
@@ -35,10 +38,19 @@ public class TransformShambaLabQueue {
             Soil soil = getSoil(shamba_lab);
             Gps gps = getGps(shamba_lab);
             Farm farm = getFarm(shamba_lab);
-            airService.create(air);
-            farmService.create(farm);
-            gpsService.create(gps);
-            soilService.create(soil);
+
+            ShambaLab shambaLab = new ShambaLab();
+            shambaLab.setAir(air);
+            shambaLab.setSoil(soil);
+            shambaLab.setGps(gps);
+            shambaLab.setFarm(farm);
+
+            shambaLabService.create(shambaLab);
+
+//            airService.create(air);
+//            farmService.create(farm);
+//            gpsService.create(gps);
+//            soilService.create(soil);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -66,7 +78,7 @@ public class TransformShambaLabQueue {
         soil.setPhosphorous(shamba_lab.get("Soil").get("Phosphorous"));
         soil.setPotassium(shamba_lab.get("Soil").get("Potassium"));
         soil.setConductivity(shamba_lab.get("Soil").get("Conductivity"));
-        soil.setConductivity(shamba_lab.get("Soil").get("Moisture"));
+        soil.setMoisture(shamba_lab.get("Soil").get("Moisture"));
         soil.setTemperature(shamba_lab.get("Soil").get("Temperature"));
         soil.setPH(shamba_lab.get("Soil").get("pH"));
         return soil;

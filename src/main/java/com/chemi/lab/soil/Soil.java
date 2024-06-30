@@ -2,8 +2,11 @@ package com.chemi.lab.soil;
 
 import com.chemi.lab.battery.Battery;
 import com.chemi.lab.generics.GenericEntity;
+import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +28,9 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
     private String moisture;
     private String temperature;
     private String pH;
+    @JsonIgnore
+    @OneToOne(mappedBy = "soil")
+    private ShambaLab shambaLab;
 
     @Override
     public void update(Soil source) {

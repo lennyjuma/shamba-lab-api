@@ -16,6 +16,4 @@ public class PriKey {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
-    private boolean isActive = true;
 }
