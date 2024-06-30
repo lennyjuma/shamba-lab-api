@@ -41,6 +41,7 @@ public class TransformShambaLabQueue {
 
             ShambaLab shambaLab = new ShambaLab();
             shambaLab.setAir(air);
+            shambaLab.setDevice_id(farm.getDevice_id());
             shambaLab.setSoil(soil);
             shambaLab.setGps(gps);
             shambaLab.setFarm(farm);
@@ -61,6 +62,7 @@ public class TransformShambaLabQueue {
         Air air = new Air();
         air.setHumidity(shamba_lab.get("Air").get("Humidity"));
         air.setTemperature(shamba_lab.get("Air").get("Temperature"));
+        air.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
         return air;
     }
     private static Gps getGps(Map<String, Map<String, String>> shamba_lab) {
@@ -69,6 +71,7 @@ public class TransformShambaLabQueue {
         gps.setLongitude(shamba_lab.get("GPS").get("Longitude"));
         gps.setDate(shamba_lab.get("GPS").get("Date"));
         gps.setTime(shamba_lab.get("GPS").get("Time"));
+        gps.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
         return gps;
     }
 
@@ -81,13 +84,14 @@ public class TransformShambaLabQueue {
         soil.setMoisture(shamba_lab.get("Soil").get("Moisture"));
         soil.setTemperature(shamba_lab.get("Soil").get("Temperature"));
         soil.setPH(shamba_lab.get("Soil").get("pH"));
+        soil.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
         return soil;
     }
     private static Farm getFarm(Map<String, Map<String, String>> shamba_lab) {
         Farm farm = new Farm();
         farm.setCrop(shamba_lab.get("Farm").get("Crop"));
         farm.setPhone(shamba_lab.get("Farm").get("Phone"));
-        farm.setDeviceID(shamba_lab.get("Farm").get("deviceID"));
+        farm.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
         return farm;
     }
 }
