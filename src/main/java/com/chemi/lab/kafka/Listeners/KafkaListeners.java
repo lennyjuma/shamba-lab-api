@@ -12,19 +12,13 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class KafkaListeners {
 
-    private final AirService airService;
-    private final FarmService farmService;
-    private final BatteryService batteryService;
-    private final GpsService gpsService;
-    private final SoilService soilService;
-
-    @KafkaListener(topics = "shamba_lab")
+    @KafkaListener(topics = "shamba_lab", groupId = "groupId")
     void shambaLabListener(String data) {
-        log.info(data);
+        System.out.println(data );
+        System.out.println("yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeah!!!!");
 
     }
 

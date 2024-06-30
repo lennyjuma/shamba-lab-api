@@ -19,7 +19,7 @@ spring:
     serialization:
       fail-on-empty-beans: false
   datasource:
-    url: jdbc:mysql://localhost:3306/shamba_lab
+    url: jdbc:mysql://localhost:3308/shamba_lab
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
