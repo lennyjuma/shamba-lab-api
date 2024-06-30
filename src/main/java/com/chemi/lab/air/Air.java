@@ -21,6 +21,7 @@ import java.io.Serializable;
 public class Air extends PriKey implements Serializable, GenericEntity<Air> {
     private String humidity;
     private String temperature;
+    private String device_id;
     @JsonIgnore
     @OneToOne(mappedBy = "air")
     private ShambaLab shambaLab;

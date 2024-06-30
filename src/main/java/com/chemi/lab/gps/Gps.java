@@ -25,6 +25,7 @@ public class Gps extends PriKey  implements Serializable, GenericEntity<Gps> {
     private String longitude;
     private String date;
     private String time;
+    private String device_id;
     @JsonIgnore
     @OneToOne(mappedBy = "gps")
     private ShambaLab shambaLab;

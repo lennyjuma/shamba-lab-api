@@ -23,6 +23,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShambaLab extends PriKey implements Serializable, GenericEntity<ShambaLab> {
+    private String device_id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "air_id", referencedColumnName = "id")

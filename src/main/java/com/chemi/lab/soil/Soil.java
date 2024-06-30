@@ -28,6 +28,7 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
     private String moisture;
     private String temperature;
     private String pH;
+    private String device_id;
     @JsonIgnore
     @OneToOne(mappedBy = "soil")
     private ShambaLab shambaLab;

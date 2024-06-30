@@ -36,7 +36,7 @@ public class TransformShambaLabQueue {
 
             ShambaLab shambaLab = new ShambaLab();
             shambaLab.setAir(air);
-            shambaLab.setDevice_id(farm.getDevice_id());
+            shambaLab.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
             shambaLab.setSoil(soil);
             shambaLab.setGps(gps);
             shambaLab.setFarm(farm);
