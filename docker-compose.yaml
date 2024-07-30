@@ -1,0 +1,44 @@
+version: '3.8'
+
+networks:
+  shamba:
+    external: true
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 2fpLxthn  # Set the password for the root user
+      MYSQL_DATABASE: shamba_lab            # Name of the database to create
+      MYSQL_USER: byte                 # Username for the database
+      MYSQL_PASSWORD: 7fpLxthn         # Password for the user
+    ports:
+      - "3304:3306"                   # Map port 3306 of the container to port 3306 on the host
+    networks:
+      shamba:
+#    volumes:
+#      - mysql-data:/var/lib/mysql     # Persist data even when the container shuts down
+    command: '--default-authentication-plugin=mysql_native_password'  # Set the authentication plugin
+    restart: always
+
+  app:
+    image: shamba_lab/v3
+    depends_on:
+      - db
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/shamba_lab?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: byte
+      SPRING_DATASOURCE_PASSWORD: 7fpLxthn
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: localhost:9092
+      SPRING_JACKSON_SERIALIZATION_FAIL-ON-EMPTY-BEANS: FALSE
+    volumes:
+      - .m2:/root/.m2
+    networks:
+      shamba:
+
+
+
