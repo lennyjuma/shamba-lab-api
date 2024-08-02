@@ -11,7 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Getter
 @Setter
 @MappedSuperclass
-public class PriKey {
+public class PriKey extends Auditable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
