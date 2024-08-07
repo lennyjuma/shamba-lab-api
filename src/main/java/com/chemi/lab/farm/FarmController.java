@@ -20,7 +20,7 @@ public class FarmController extends GenericController<Farm> {
     }
 
     @GetMapping("device")
-    public List<Farm> getAll(@RequestParam(name = "device_id") String device_id) {
-        return farmService.getFarmBsyDeviceID(device_id);
+    public List<Farm> getFarmsByDeviceID(@RequestParam(name = "device_id") String device_id) {
+        return farmService.getFarmsByDeviceID(device_id);
     }
 }

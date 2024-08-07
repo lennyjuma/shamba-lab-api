@@ -17,7 +17,7 @@ public class FarmService extends GenericService<Farm> {
         this.farmRepository = farmRepository;
     }
 
-    public List<Farm> getFarmBsyDeviceID(String device_id) {
+    public List<Farm> getFarmsByDeviceID(String device_id) {
         return farmRepository.findByDeviceId(device_id).orElseThrow(
                 () -> new RuntimeException("No Farm found for device_id: " + device_id)
         );
