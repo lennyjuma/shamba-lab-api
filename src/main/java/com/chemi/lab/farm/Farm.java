@@ -22,7 +22,7 @@ import java.io.Serializable;
 public class Farm extends PriKey  implements Serializable, GenericEntity<Farm> {
     private String crop;
     private String phone;
-    private String device_id;
+    private String deviceId;
     @JsonIgnore
     @OneToOne(mappedBy = "farm")
     private ShambaLab shambaLab;
@@ -31,7 +31,7 @@ public class Farm extends PriKey  implements Serializable, GenericEntity<Farm> {
     public void update(Farm source) {
         setCrop(source.getCrop());
         setPhone(source.getPhone());
-        setDevice_id(source.getDevice_id());
+        setDeviceId(source.getDeviceId());
     }
 
     @Override

@@ -11,4 +11,6 @@ public class BatteryService  extends GenericService<Battery> {
     public BatteryService(GenericRepository<Battery> repository) {
         super(repository);
     }
+
+
 }

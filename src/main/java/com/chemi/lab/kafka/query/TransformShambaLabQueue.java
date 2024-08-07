@@ -1,16 +1,12 @@
 package com.chemi.lab.kafka.query;
 
 import com.chemi.lab.air.Air;
-import com.chemi.lab.air.AirService;
 import com.chemi.lab.battery.BatteryService;
 import com.chemi.lab.farm.Farm;
-import com.chemi.lab.farm.FarmService;
 import com.chemi.lab.gps.Gps;
-import com.chemi.lab.gps.GpsService;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.shambaLab.ShambaLabService;
 import com.chemi.lab.soil.Soil;
-import com.chemi.lab.soil.SoilService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +32,7 @@ public class TransformShambaLabQueue {
 
             ShambaLab shambaLab = new ShambaLab();
             shambaLab.setAir(air);
-            shambaLab.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
+            shambaLab.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
             shambaLab.setSoil(soil);
             shambaLab.setGps(gps);
             shambaLab.setFarm(farm);
@@ -52,7 +48,7 @@ public class TransformShambaLabQueue {
         Air air = new Air();
         air.setHumidity(shamba_lab.get("Air").get("Humidity"));
         air.setTemperature(shamba_lab.get("Air").get("Temperature"));
-        air.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
+        air.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         return air;
     }
     private static Gps getGps(Map<String, Map<String, String>> shamba_lab) {
@@ -61,7 +57,7 @@ public class TransformShambaLabQueue {
         gps.setLongitude(shamba_lab.get("GPS").get("Longitude"));
         gps.setDate(shamba_lab.get("GPS").get("Date"));
         gps.setTime(shamba_lab.get("GPS").get("Time"));
-        gps.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
+        gps.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         return gps;
     }
 
@@ -74,14 +70,14 @@ public class TransformShambaLabQueue {
         soil.setMoisture(shamba_lab.get("Soil").get("Moisture"));
         soil.setTemperature(shamba_lab.get("Soil").get("Temperature"));
         soil.setPH(shamba_lab.get("Soil").get("pH"));
-        soil.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
+        soil.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         return soil;
     }
     private static Farm getFarm(Map<String, Map<String, String>> shamba_lab) {
         Farm farm = new Farm();
         farm.setCrop(shamba_lab.get("Farm").get("Crop"));
         farm.setPhone(shamba_lab.get("Farm").get("Phone"));
-        farm.setDevice_id(shamba_lab.get("Farm").get("deviceID"));
+        farm.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         return farm;
     }
 }

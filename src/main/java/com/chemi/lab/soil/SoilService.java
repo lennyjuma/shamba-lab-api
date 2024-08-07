@@ -10,4 +10,5 @@ public class SoilService extends GenericService<Soil> {
         super(repository);
     }
 
+
 }

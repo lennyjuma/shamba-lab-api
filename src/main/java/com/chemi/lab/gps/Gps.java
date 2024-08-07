@@ -1,7 +1,6 @@
 package com.chemi.lab.gps;
 
 
-import com.chemi.lab.battery.Battery;
 import com.chemi.lab.generics.GenericEntity;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
@@ -25,7 +24,7 @@ public class Gps extends PriKey  implements Serializable, GenericEntity<Gps> {
     private String longitude;
     private String date;
     private String time;
-    private String device_id;
+    private String deviceId;
     @JsonIgnore
     @OneToOne(mappedBy = "gps")
     private ShambaLab shambaLab;

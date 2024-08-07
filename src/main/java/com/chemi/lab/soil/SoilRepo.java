@@ -1,7 +1,11 @@
 package com.chemi.lab.soil;
 
 import com.chemi.lab.generics.GenericRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface SoilRepo extends GenericRepository<Soil> {
+    Optional<List<Soil>> findByDeviceId(String device_id);
+
 }
