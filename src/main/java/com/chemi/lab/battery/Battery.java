@@ -22,6 +22,7 @@ public class Battery extends PriKey implements Serializable, GenericEntity<Batte
     private String current;
     private String power;
     private String state;
+    private String deviceId;
 
     @Override
     public void update(Battery source) {
