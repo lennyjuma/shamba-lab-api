@@ -3,6 +3,7 @@ package com.chemi.lab.soil;
 import com.chemi.lab.farm.Farm;
 import com.chemi.lab.generics.GenericController;
 import com.chemi.lab.generics.GenericRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +21,9 @@ public class SoilController extends GenericController<Soil> {
         this.soilService = soilService;
     }
     @GetMapping("device")
-    public List<Soil> getSoilByDeviceID(@RequestParam(name = "device_id") String device_id) {
-        return soilService.getSoilByDeviceID(device_id);
+    public Page<Soil> getSoilByDeviceID(@RequestParam(name = "device_id") String device_id,
+                                        @RequestParam(name = "page") Integer page,
+                                        @RequestParam(name = "size") Integer size) {
+        return soilService.getSoilByDeviceID(device_id,page,size);
     }
 }

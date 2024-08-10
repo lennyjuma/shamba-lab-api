@@ -64,7 +64,7 @@ public class TransformShambaLabQueue {
     private static Soil getSoil(Map<String, Map<String, String>> shamba_lab) {
         Soil soil = new Soil();
         soil.setNitrogen(shamba_lab.get("Soil").get("Nitrogen"));
-        soil.setPhosphorous(shamba_lab.get("Soil").get("Phosphorous"));
+        soil.setPhosphorous(shamba_lab.get("Soil").get("Phosphorus"));
         soil.setPotassium(shamba_lab.get("Soil").get("Potassium"));
         soil.setConductivity(shamba_lab.get("Soil").get("Conductivity"));
         soil.setMoisture(shamba_lab.get("Soil").get("Moisture"));

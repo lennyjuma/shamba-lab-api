@@ -2,8 +2,11 @@ package com.chemi.lab.soil;
 
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.generics.GenericService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -15,8 +18,9 @@ public class SoilService extends GenericService<Soil> {
     }
 
 
-    public List<Soil> getSoilByDeviceID(String deviceId) {
-        return soilRepository.findByDeviceId(deviceId).orElseThrow(
+    public Page<Soil> getSoilByDeviceID(String deviceId,Integer page,Integer size) {
+        PageRequest pg = PageRequest.of(page,size);
+        return soilRepository.findByDeviceId(deviceId,  pg).orElseThrow(
                 () -> new RuntimeException("No Soil data found for device_id: " + deviceId));
     }
 }
