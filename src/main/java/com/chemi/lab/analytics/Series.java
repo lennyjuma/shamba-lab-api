@@ -11,8 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Analytics {
-    private List<String> categories;
-    private List<Series> series;
-
+public class Series {
+    private String name;
+    private List<String> data;
 }
