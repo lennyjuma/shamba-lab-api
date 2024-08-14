@@ -22,8 +22,8 @@ spring:
       fail-on-empty-beans: false
   datasource:
     url: jdbc:mysql://localhost:3303/shamba_lab
-    username: byte
-    password: 7fpLxthn
+    username: root
+    password: 2fpLxthn
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

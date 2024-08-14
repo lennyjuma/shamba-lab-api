@@ -16,4 +16,5 @@ public class PriKey extends Auditable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+    private String reading_date;
 }

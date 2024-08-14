@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,7 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Analytics {
-    private List<String> categories;
-    private List<Series> series;
+    private Charts nitrogen = new Charts();
+    private Charts potassium = new Charts();
+    private Charts phosphorus = new Charts();
+    private Charts conductivity = new Charts();
+    private Charts moisture = new Charts();
+    private Charts temperature = new Charts();
+    private Charts pH = new Charts();
+    private List<String> categories = new ArrayList<>();
 
 }

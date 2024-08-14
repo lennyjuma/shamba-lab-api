@@ -36,6 +36,8 @@ public class TransformShambaLabQueue {
             shambaLab.setSoil(soil);
             shambaLab.setGps(gps);
             shambaLab.setFarm(farm);
+            String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
+            shambaLab.setReading_date(readingDate);
 
             shambaLabService.create(shambaLab);
 
@@ -49,6 +51,9 @@ public class TransformShambaLabQueue {
         air.setHumidity(shamba_lab.get("Air").get("Humidity"));
         air.setTemperature(shamba_lab.get("Air").get("Temperature"));
         air.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
+        air.setCrop(shamba_lab.get("Farm").get("Crop"));
+        String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
+        air.setReading_date(readingDate);
         return air;
     }
     private static Gps getGps(Map<String, Map<String, String>> shamba_lab) {
@@ -58,6 +63,8 @@ public class TransformShambaLabQueue {
         gps.setDate(shamba_lab.get("GPS").get("Date"));
         gps.setTime(shamba_lab.get("GPS").get("Time"));
         gps.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
+        String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
+        gps.setReading_date(readingDate);
         return gps;
     }
 
@@ -70,6 +77,9 @@ public class TransformShambaLabQueue {
         soil.setMoisture(shamba_lab.get("Soil").get("Moisture"));
         soil.setTemperature(shamba_lab.get("Soil").get("Temperature"));
         soil.setPH(shamba_lab.get("Soil").get("pH"));
+        soil.setCrop(shamba_lab.get("Farm").get("Crop"));
+        String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
+        soil.setReading_date(readingDate);
         soil.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         return soil;
     }
@@ -78,6 +88,8 @@ public class TransformShambaLabQueue {
         farm.setCrop(shamba_lab.get("Farm").get("Crop"));
         farm.setPhone(shamba_lab.get("Farm").get("Phone"));
         farm.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
+        String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
+        farm.setReading_date(readingDate);
         return farm;
     }
 }
