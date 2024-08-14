@@ -3,6 +3,8 @@ package com.chemi.lab.analytics;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.soil.SoilRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,14 +16,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnalyticsService {
     private final SoilRepo soilRepository;
-    public Analytics getAnalytics(@RequestParam String deviceID) {
+    public Analytics getAnalytics(@RequestParam String deviceID,Integer size) {
         HashMap<String, List<String>> map = new HashMap<>();
-        List<Soil> soilList = soilRepository.findAllByDeviceId(deviceID).orElseThrow(
-                    () -> new RuntimeException("No analytics found for device " + deviceID)
-            );
+        PageRequest pg = PageRequest.of(0,size);
+        Page<Soil> soils = soilRepository.findByDeviceId(deviceID, pg).orElseThrow(
+                () -> new RuntimeException("No analytics found for device " + deviceID)
+        );
         Analytics analytics = new Analytics();
 
-        soilList.forEach(soil -> {
+        soils.forEach(soil -> {
             Charts charts = new Charts();
             analytics.getNitrogen().setName("Nitrogen");
             analytics.getNitrogen().getData().add(getParseInt(soil.getNitrogen()));

@@ -15,9 +15,9 @@ public class AnalyticsController {
 
     @GetMapping
     public Analytics getAnalytics(@RequestParam String deviceID,
-                                  @RequestParam(name = "size",required = false) String size,
+                                  @RequestParam(name = "size",required = false) Integer size,
                                   @RequestParam(name = "farm",required = false) String farm,
                                   @RequestParam(name = "date",required = false) String date) {
-        return analyticsService.getAnalytics(deviceID);
+        return analyticsService.getAnalytics(deviceID,size);
     }
 }
