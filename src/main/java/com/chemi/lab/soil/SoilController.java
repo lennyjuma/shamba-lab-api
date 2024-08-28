@@ -26,4 +26,8 @@ public class SoilController extends GenericController<Soil> {
                                         @RequestParam(name = "size") Integer size) {
         return soilService.getSoilByDeviceID(device_id,page,size);
     }
+    @GetMapping("latest")
+    public Soil getLatestSoilByDeviceID(@RequestParam(name = "device_id") String device_id) {
+        return soilService.getLatestSoilByDeviceID(device_id);
+    }
 }

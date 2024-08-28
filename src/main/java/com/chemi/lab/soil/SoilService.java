@@ -23,4 +23,9 @@ public class SoilService extends GenericService<Soil> {
         return soilRepository.findByDeviceId(deviceId,  pg).orElseThrow(
                 () -> new RuntimeException("No Soil data found for device_id: " + deviceId));
     }
+
+    public Soil getLatestSoilByDeviceID(String deviceId) {
+        return soilRepository.findTopByDeviceIdOrderByCreatedAtDesc(deviceId).orElseThrow(
+                () -> new RuntimeException("No Soil data found for device_id: " + deviceId));
+    }
 }

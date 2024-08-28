@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface SoilRepo extends GenericRepository<Soil> {
     Optional<Page<Soil>> findByDeviceId(String device_id, PageRequest pg);
     Optional<List<Soil>> findAllByDeviceId(String device_id);
+    Optional<Soil> findTopByDeviceIdOrderByCreatedAtDesc(String device_id);
 
 }
