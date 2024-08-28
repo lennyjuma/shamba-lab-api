@@ -1,5 +1,7 @@
 package com.chemi.lab.analytics;
 
+import com.chemi.lab.air.Air;
+import com.chemi.lab.air.AirRepo;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.soil.SoilRepo;
 import lombok.RequiredArgsConstructor;
@@ -9,47 +11,59 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AnalyticsService {
     private final SoilRepo soilRepository;
-    public Analytics getAnalytics(@RequestParam String deviceID,Integer size) {
-        HashMap<String, List<String>> map = new HashMap<>();
+    private final AirRepo airRepo;
+    public SoilAnalytics getSoilAnalytics(@RequestParam String deviceID, Integer size) {
         PageRequest pg = PageRequest.of(0,size);
         Page<Soil> soils = soilRepository.findByDeviceId(deviceID, pg).orElseThrow(
                 () -> new RuntimeException("No analytics found for device " + deviceID)
         );
-        Analytics analytics = new Analytics();
+        SoilAnalytics soilAnalytics = new SoilAnalytics();
 
         soils.forEach(soil -> {
-            Charts charts = new Charts();
-            analytics.getNitrogen().setName("Nitrogen");
-
-            analytics.getNitrogen().getData().add(getParseInt(soil.getNitrogen()));
-            analytics.getPotassium().setName("Potassium");
-            analytics.getPotassium().getData().add(getParseInt(soil.getPotassium()));
-            analytics.getPhosphorus().setName("Phosphorus");
-            analytics.getPhosphorus().getData().add(getParseInt(soil.getPhosphorous()));
-            analytics.getConductivity().setName("Electrical conductivity");
-            analytics.getConductivity().getData().add(getParseInt(soil.getConductivity()));
-            analytics.getTemperature().setName("Temperature");
-            analytics.getTemperature().getData().add(getParseInt(soil.getTemperature()));
-            analytics.getMoisture().setName("Moisture");
-            analytics.getMoisture().getData().add(getParseInt(soil.getMoisture()));
-            analytics.getPH().setName("pH");
-            analytics.getPH().getData().add(getParseInt(soil.getPH()));
-            analytics.getCategories().add(soil.getReading_date());
+            soilAnalytics.getNitrogen().setName("Nitrogen");
+            soilAnalytics.getNitrogen().getData().add(getParseInt(soil.getNitrogen()));
+            soilAnalytics.getPotassium().setName("Potassium");
+            soilAnalytics.getPotassium().getData().add(getParseInt(soil.getPotassium()));
+            soilAnalytics.getPhosphorus().setName("Phosphorus");
+            soilAnalytics.getPhosphorus().getData().add(getParseInt(soil.getPhosphorous()));
+            soilAnalytics.getConductivity().setName("Electrical conductivity");
+            soilAnalytics.getConductivity().getData().add(getParseInt(soil.getConductivity()));
+            soilAnalytics.getTemperature().setName("Temperature");
+            soilAnalytics.getTemperature().getData().add(getParseInt(soil.getTemperature()));
+            soilAnalytics.getMoisture().setName("Moisture");
+            soilAnalytics.getMoisture().getData().add(getParseInt(soil.getMoisture()));
+            soilAnalytics.getPH().setName("pH");
+            soilAnalytics.getPH().getData().add(getParseInt(soil.getPH()));
+            soilAnalytics.getCategories().add(soil.getReading_date());
 
 
         });
 
-            return analytics;
+            return soilAnalytics;
     }
 
     private static BigDecimal getParseInt(String val) {
         return new BigDecimal(val);
+    }
+
+    public AirAnalytics getAirAnalytics(String deviceID, Integer size) {
+        PageRequest pg = PageRequest.of(0,size);
+        Page<Air> air_properties = airRepo.findByDeviceId(deviceID, pg).orElseThrow(
+                () -> new RuntimeException("No analytics found for device " + deviceID)
+        );
+        AirAnalytics airAnalytics = new AirAnalytics();
+        air_properties.forEach(air -> {
+            airAnalytics.getTemp().setName("Nitrogen");
+            airAnalytics.getTemp().getData().add(getParseInt(air.getTemperature()));
+            airAnalytics.getHumidity().setName("Nitrogen");
+            airAnalytics.getHumidity().getData().add(getParseInt(air.getHumidity()));
+            airAnalytics.getCategories().add(air.getReading_date());
+        });
+        return airAnalytics;
     }
 }

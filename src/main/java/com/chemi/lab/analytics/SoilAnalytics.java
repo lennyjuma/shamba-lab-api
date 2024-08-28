@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Analytics {
+public class SoilAnalytics {
     private Charts nitrogen = new Charts();
     private Charts potassium = new Charts();
     private Charts phosphorus = new Charts();
