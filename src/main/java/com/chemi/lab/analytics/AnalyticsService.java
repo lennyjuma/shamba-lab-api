@@ -27,6 +27,7 @@ public class AnalyticsService {
         soils.forEach(soil -> {
             Charts charts = new Charts();
             analytics.getNitrogen().setName("Nitrogen");
+
             analytics.getNitrogen().getData().add(getParseInt(soil.getNitrogen()));
             analytics.getPotassium().setName("Potassium");
             analytics.getPotassium().getData().add(getParseInt(soil.getPotassium()));

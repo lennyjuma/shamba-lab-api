@@ -16,5 +16,6 @@ import java.util.function.BiConsumer;
 @AllArgsConstructor
 public class Charts {
     private String name;
+    private String reading_date;
     private List<BigDecimal> data = new ArrayList<>();
 }
