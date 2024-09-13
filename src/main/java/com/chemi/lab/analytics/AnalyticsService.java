@@ -4,6 +4,7 @@ import com.chemi.lab.air.Air;
 import com.chemi.lab.air.AirRepo;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.soil.SoilRepo;
+import com.chemi.lab.utils.DateFormater;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 public class AnalyticsService {
     private final SoilRepo soilRepository;
     private final AirRepo airRepo;
+    private final DateFormater dateFormater;
     public SoilAnalytics getSoilAnalytics(@RequestParam String deviceID, Integer size) {
         PageRequest pg = PageRequest.of(0,size);
         Page<Soil> soils = soilRepository.findByDeviceId(deviceID, pg).orElseThrow(
@@ -39,7 +41,7 @@ public class AnalyticsService {
             soilAnalytics.getMoisture().getData().add(getParseInt(soil.getMoisture()));
             soilAnalytics.getPH().setName("pH");
             soilAnalytics.getPH().getData().add(getParseInt(soil.getPH()));
-            soilAnalytics.getCategories().add(soil.getReading_date());
+            soilAnalytics.getCategories().add(dateFormater.formatDate(soil.getReadingDate()));
 
 
         });
@@ -62,7 +64,7 @@ public class AnalyticsService {
             airAnalytics.getTemp().getData().add(getParseInt(air.getTemperature()));
             airAnalytics.getHumidity().setName("Nitrogen");
             airAnalytics.getHumidity().getData().add(getParseInt(air.getHumidity()));
-            airAnalytics.getCategories().add(air.getReading_date());
+            airAnalytics.getCategories().add(dateFormater.formatDate(air.getReadingDate()));
         });
         return airAnalytics;
     }

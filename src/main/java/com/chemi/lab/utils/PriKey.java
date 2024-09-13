@@ -1,12 +1,15 @@
 package com.chemi.lab.utils;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,5 +19,6 @@ public class PriKey extends Auditable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-    private String reading_date;
+    @Column(name = "reading_date")
+    private LocalDateTime readingDate;
 }

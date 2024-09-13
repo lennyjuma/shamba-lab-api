@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,13 +39,18 @@ public class TransformShambaLabQueue {
             shambaLab.setGps(gps);
             shambaLab.setFarm(farm);
             String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
-            shambaLab.setReading_date(readingDate);
+            shambaLab.setReadingDate(getReadingDate(readingDate));
 
             shambaLabService.create(shambaLab);
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private static LocalDateTime getReadingDate(String readingDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
+        return LocalDateTime.parse(readingDate, formatter);
     }
 
     private static Air getAir(Map<String, Map<String, String>> shamba_lab) {
@@ -53,7 +60,7 @@ public class TransformShambaLabQueue {
         air.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         air.setCrop(shamba_lab.get("Farm").get("Crop"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
-        air.setReading_date(readingDate);
+        air.setReadingDate(getReadingDate(readingDate));
         return air;
     }
     private static Gps getGps(Map<String, Map<String, String>> shamba_lab) {
@@ -64,7 +71,7 @@ public class TransformShambaLabQueue {
         gps.setTime(shamba_lab.get("GPS").get("Time"));
         gps.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
-        gps.setReading_date(readingDate);
+        gps.setReadingDate(getReadingDate(readingDate));
         return gps;
     }
 
@@ -79,7 +86,7 @@ public class TransformShambaLabQueue {
         soil.setPH(shamba_lab.get("Soil").get("pH"));
         soil.setCrop(shamba_lab.get("Farm").get("Crop"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
-        soil.setReading_date(readingDate);
+        soil.setReadingDate(getReadingDate(readingDate));
         soil.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         return soil;
     }
@@ -89,7 +96,7 @@ public class TransformShambaLabQueue {
         farm.setPhone(shamba_lab.get("Farm").get("Phone"));
         farm.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
-        farm.setReading_date(readingDate);
+        farm.setReadingDate(getReadingDate(readingDate));
         return farm;
     }
 }
