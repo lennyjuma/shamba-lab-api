@@ -1,6 +1,7 @@
 package com.chemi.lab.auth.models;
 
 
+import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.utils.PriKey;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,9 @@ public class Customer  extends PriKey implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Shamba> shambaList;
 
 
     @Override
