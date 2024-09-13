@@ -1,4 +1,6 @@
 package com.chemi.lab.mkulima.crop;
 
-public class CropRepo {
+import com.chemi.lab.generics.GenericRepository;
+
+public interface CropRepo extends GenericRepository<Crop> {
 }
