@@ -45,6 +45,7 @@ public class CustomerService {
                 .l_name(customer.getL_name())
                 .email(customer.getEmail())
                 .fullName(customer.getF_name() + " " + customer.getL_name())
+                .shambaList(customer.getShambaList())
                 .build();
     }
 
@@ -53,6 +54,8 @@ public class CustomerService {
                 .f_name(registerRequest.getF_name())
                 .l_name(registerRequest.getL_name())
                 .email(registerRequest.getEmail())
+                .phoneNumber(registerRequest.getPhoneNumber())
+                .country(registerRequest.getCountry())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.ADMIN)
                 .build();

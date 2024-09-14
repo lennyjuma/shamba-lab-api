@@ -1,10 +1,14 @@
 package com.chemi.lab.auth.dto;
 
 
+import com.chemi.lab.mkulima.farm.Shamba;
+import com.chemi.lab.shambaLab.ShambaLab;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -19,4 +23,5 @@ public class AuthResponse {
     private String l_name;
     private String fullName;
     private String role;
+    private List<Shamba> shambaList;
 }

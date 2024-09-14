@@ -23,9 +23,11 @@ import java.util.List;
 @Table(name = "user")
 public class Customer  extends PriKey implements UserDetails {
     private String email;
+    private String phoneNumber;
     private String f_name;
     private String l_name;
     private String password;
+    private String country;
     @Enumerated(EnumType.STRING)
     private Role role;
 
