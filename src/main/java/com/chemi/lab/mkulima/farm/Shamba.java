@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,10 +19,15 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "shamba" , uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+})
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shamba extends PriKey   implements Serializable, GenericEntity<Shamba> {
+    @Column(unique = true, nullable = false)
     private String name;
+    private String stmName;
     @Enumerated(EnumType.STRING)
     private FarmType farmingType;
     private String location;

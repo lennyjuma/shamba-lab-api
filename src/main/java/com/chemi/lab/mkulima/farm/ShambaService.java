@@ -1,14 +1,19 @@
 package com.chemi.lab.mkulima.farm;
 
+import com.chemi.lab.auth.config.SecurityContextMapper;
+import com.chemi.lab.auth.models.Customer;
+import com.chemi.lab.auth.repos.CustomerRepository;
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.generics.GenericService;
 import com.chemi.lab.mkulima.crop.Crop;
 import com.chemi.lab.mkulima.crop.CropRepo;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -16,9 +21,17 @@ import java.util.Objects;
 public class ShambaService {
     private final ShambaRepo shambaRepo;
     private final CropRepo cropRepo;
+    private final CustomerRepository customerRepository;
+    private final SecurityContextMapper securityContextMapper;
 
-    public ResponseEntity<Shamba> addShamba(ShambaBodydto shamba) {
+    public Shamba addShamba(ShambaBodydto shamba) {
+        String user_id = securityContextMapper.getLoggedInCustomer().getId();
         Shamba farm = new Shamba();
+        Customer customer = customerRepository.findById(user_id).orElseThrow(
+                () -> new ResourceNotFoundException("Customer with id "  + user_id + " not found")
+        );
+        farm.setCustomer(customer);
+        farm.setStmName(customer.getPhoneNumber() + "_" + shamba.getName());
         farm.setName(shamba.getName());
         farm.setLocation(shamba.getLocation());
         if(Objects.equals(shamba.getFarmingType(), "Mono cropping")){
@@ -35,6 +48,13 @@ public class ShambaService {
             Crop saved_crop = cropRepo.save(crop);
         });
 
-        return null;
+        return saved_farm;
+    }
+
+    public List<Shamba> fetchShambas() {
+        String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        return shambaRepo.findShambasByCustomer_Id(user_id).orElseThrow(
+                () -> new ResourceNotFoundException("Customer with id " + user_id + " not found")
+        );
     }
 }

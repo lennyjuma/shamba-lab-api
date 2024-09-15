@@ -25,6 +25,7 @@ import java.io.Serializable;
 public class ShambaLab extends PriKey implements Serializable, GenericEntity<ShambaLab> {
 
     private String deviceId;
+    private String farmId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "air_id", referencedColumnName = "id")
@@ -49,6 +50,7 @@ public class ShambaLab extends PriKey implements Serializable, GenericEntity<Sha
         setSoil(source.getSoil());
         setGps(source.getGps());
         setDeviceId(source.getDeviceId());
+        setFarmId(source.getFarmId());
     }
 
     @Override

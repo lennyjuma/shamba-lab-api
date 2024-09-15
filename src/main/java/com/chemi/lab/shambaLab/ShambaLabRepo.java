@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface ShambaLabRepo extends GenericRepository<ShambaLab> {
     Optional<List<ShambaLab>> findByDeviceId(String device_id);
+    Optional<List<ShambaLab>> findByFarmId(String device_id);
 
 }

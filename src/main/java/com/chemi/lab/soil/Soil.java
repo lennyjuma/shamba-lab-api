@@ -29,6 +29,7 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
     private String pH;
     private String deviceId;
     private String crop;
+    private String farmId;
     @JsonIgnore
     @OneToOne(mappedBy = "soil")
     private ShambaLab shambaLab;
@@ -42,6 +43,7 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
         setMoisture(source.getMoisture());
         setTemperature(source.getTemperature());
         setPH(source.getPH());
+        setFarmId(source.getFarmId());
     }
 
     @Override

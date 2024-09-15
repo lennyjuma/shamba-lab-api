@@ -24,6 +24,7 @@ public class Farm extends PriKey  implements Serializable, GenericEntity<Farm> {
     private String crop;
     private String phone;
     private String deviceId;
+    private String farmId;
     @JsonIgnore
     @OneToOne(mappedBy = "farm")
     private ShambaLab shambaLab;
@@ -33,6 +34,7 @@ public class Farm extends PriKey  implements Serializable, GenericEntity<Farm> {
         setCrop(source.getCrop());
         setPhone(source.getPhone());
         setDeviceId(source.getDeviceId());
+        setFarmId(source.getFarmId());
     }
 
     @Override

@@ -23,6 +23,7 @@ public class Air extends PriKey implements Serializable, GenericEntity<Air> {
     private String temperature;
     private String crop;
     private String deviceId;
+    private String farmId;
     @JsonIgnore
     @OneToOne(mappedBy = "air")
     private ShambaLab shambaLab;
@@ -31,6 +32,7 @@ public class Air extends PriKey implements Serializable, GenericEntity<Air> {
     public void update(Air source) {
         setHumidity(source.getHumidity());
         setTemperature(source.getTemperature());
+        setFarmId(source.getFarmId());
     }
 
     @Override

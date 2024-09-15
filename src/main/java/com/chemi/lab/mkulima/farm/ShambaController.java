@@ -4,10 +4,9 @@ import com.chemi.lab.generics.GenericController;
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -21,6 +20,11 @@ public class ShambaController {
 
     @PostMapping
     public ResponseEntity<Shamba> create(@RequestBody ShambaBodydto shamba) {
-        return shambaService.addShamba(shamba);
+        return ResponseEntity.ok(shambaService.addShamba(shamba)) ;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Shamba>> fetchShambas() {
+        return ResponseEntity.ok(shambaService.fetchShambas());
     }
 }
