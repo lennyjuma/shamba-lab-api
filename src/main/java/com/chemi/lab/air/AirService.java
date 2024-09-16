@@ -5,6 +5,7 @@ import com.chemi.lab.auth.config.SecurityContextMapper;
 import com.chemi.lab.farm.Farm;
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.generics.GenericService;
+import com.chemi.lab.mkulima.farm.ShambaService;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.soil.SoilRepo;
 import org.springframework.data.domain.Page;
@@ -16,23 +17,29 @@ import java.util.List;
 @Service
 public class AirService extends GenericService<Air> {
     private final AirRepo airRepository;
+    private final ShambaService shambaService;
     private final SecurityContextMapper securityContextMapper;
-    public AirService(GenericRepository<Air> repository, AirRepo airRepository, SecurityContextMapper securityContextMapper) {
+    public AirService(GenericRepository<Air> repository, AirRepo airRepository, ShambaService shambaService, SecurityContextMapper securityContextMapper) {
         super(repository);
         this.airRepository = airRepository;
+        this.shambaService = shambaService;
         this.securityContextMapper = securityContextMapper;
     }
 
-    public Page<Air> getAirByDeviceID(String deviceId, Integer page, Integer size) {
+    public Page<Air> getAirByDeviceID(String farmId, Integer page, Integer size) {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        farmId = shambaService.getDefaultFarmID(farmId);
+        String finalFarmId = farmId;
         System.out.println("user_id: " + user_id);
         PageRequest pg = PageRequest.of(page,size);
-        return airRepository.findByDeviceId(deviceId,pg).orElseThrow(
-                () -> new RuntimeException("No Air data found for device_id: " + deviceId));
+        return airRepository.findByShamba_Id(farmId,pg).orElseThrow(
+                () -> new RuntimeException("No Air data found for device_id: " + finalFarmId));
     }
 
-    public Air getLatestAirByDeviceID(String deviceId) {
-        return airRepository.findTopByDeviceIdOrderByCreatedAtDesc(deviceId).orElseThrow(
-                () -> new RuntimeException("No Air data found for device_id: " + deviceId));
+    public Air getLatestAirByDeviceID(String farmId) {
+        farmId = shambaService.getDefaultFarmID(farmId);
+        String finalFarmId = farmId;
+        return airRepository.findTopByShamba_IdOrderByCreatedAtDesc(farmId).orElseThrow(
+                () -> new RuntimeException("No Air data found for device_id: " + finalFarmId));
     }
 }

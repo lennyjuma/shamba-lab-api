@@ -1,10 +1,12 @@
 package com.chemi.lab.air;
 
 import com.chemi.lab.generics.GenericEntity;
+import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,16 +25,19 @@ public class Air extends PriKey implements Serializable, GenericEntity<Air> {
     private String temperature;
     private String crop;
     private String deviceId;
-    private String farmId;
+
     @JsonIgnore
     @OneToOne(mappedBy = "air")
     private ShambaLab shambaLab;
+
+//    @JsonIgnore
+    @ManyToOne
+    private Shamba shamba;
 
     @Override
     public void update(Air source) {
         setHumidity(source.getHumidity());
         setTemperature(source.getTemperature());
-        setFarmId(source.getFarmId());
     }
 
     @Override

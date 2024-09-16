@@ -1,7 +1,5 @@
 package com.chemi.lab.mkulima.farm;
 
-import com.chemi.lab.generics.GenericController;
-import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +23,6 @@ public class ShambaController {
 
     @GetMapping
     public ResponseEntity<List<Shamba>> fetchShambas() {
-        return ResponseEntity.ok(shambaService.fetchShambas());
+        return ResponseEntity.ok(shambaService.fetchShambasByCustomerId());
     }
 }

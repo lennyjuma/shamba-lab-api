@@ -24,13 +24,13 @@ public class AirController extends GenericController<Air> {
     }
 
     @GetMapping("device")
-    public Page<Air> getAirDataBYDeviceData(@RequestParam(name = "device_id") String device_id,
+    public Page<Air> getAirDataBYDeviceData(@RequestParam(name = "farm_id",required = false) String farm_id,
                                             @RequestParam(name = "page") Integer page,
                                             @RequestParam(name = "size") Integer size) {
-        return airService.getAirByDeviceID(device_id,page,size);
+        return airService.getAirByDeviceID(farm_id,page,size);
     }
     @GetMapping("latest")
-    public Air getLatestAirByDeviceID(@RequestParam(name = "device_id") String device_id) {
-        return airService.getLatestAirByDeviceID(device_id);
+    public Air getLatestAirByDeviceID(@RequestParam(name = "farm_id",required = false) String farm_id) {
+        return airService.getLatestAirByDeviceID(farm_id);
     }
 }

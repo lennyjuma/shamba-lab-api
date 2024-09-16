@@ -2,6 +2,7 @@ package com.chemi.lab.gps;
 
 
 import com.chemi.lab.generics.GenericEntity;
+import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,6 +29,7 @@ public class Gps extends PriKey  implements Serializable, GenericEntity<Gps> {
     @JsonIgnore
     @OneToOne(mappedBy = "gps")
     private ShambaLab shambaLab;
+
 
     @Override
     public void update(Gps source) {

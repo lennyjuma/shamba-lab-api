@@ -1,10 +1,12 @@
 package com.chemi.lab.soil;
 
 import com.chemi.lab.generics.GenericEntity;
+import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +31,11 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
     private String pH;
     private String deviceId;
     private String crop;
-    private String farmId;
+
+//    @JsonIgnore
+    @ManyToOne
+    private Shamba shamba;
+
     @JsonIgnore
     @OneToOne(mappedBy = "soil")
     private ShambaLab shambaLab;
@@ -43,7 +49,6 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
         setMoisture(source.getMoisture());
         setTemperature(source.getTemperature());
         setPH(source.getPH());
-        setFarmId(source.getFarmId());
     }
 
     @Override

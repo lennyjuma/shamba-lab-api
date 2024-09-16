@@ -2,6 +2,7 @@ package com.chemi.lab.analytics;
 
 import com.chemi.lab.air.Air;
 import com.chemi.lab.air.AirRepo;
+import com.chemi.lab.mkulima.farm.ShambaService;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.soil.SoilRepo;
 import com.chemi.lab.utils.DateFormater;
@@ -17,12 +18,15 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 public class AnalyticsService {
     private final SoilRepo soilRepository;
+    private final ShambaService shambaService;
     private final AirRepo airRepo;
     private final DateFormater dateFormater;
-    public SoilAnalytics getSoilAnalytics(@RequestParam String deviceID, Integer size) {
+    public SoilAnalytics getSoilAnalytics( String farmId, Integer size) {
         PageRequest pg = PageRequest.of(0,size);
-        Page<Soil> soils = soilRepository.findByDeviceId(deviceID, pg).orElseThrow(
-                () -> new RuntimeException("No analytics found for device " + deviceID)
+        farmId = shambaService.getDefaultFarmID(farmId);
+        String finalFarmId = farmId;
+        Page<Soil> soils = soilRepository.findByShamba_Id(farmId, pg).orElseThrow(
+                () -> new RuntimeException("No analytics found for device " + finalFarmId)
         );
         SoilAnalytics soilAnalytics = new SoilAnalytics();
 
@@ -53,10 +57,12 @@ public class AnalyticsService {
         return new BigDecimal(val);
     }
 
-    public AirAnalytics getAirAnalytics(String deviceID, Integer size) {
+    public AirAnalytics getAirAnalytics(String farmId, Integer size) {
         PageRequest pg = PageRequest.of(0,size);
-        Page<Air> air_properties = airRepo.findByDeviceId(deviceID, pg).orElseThrow(
-                () -> new RuntimeException("No analytics found for device " + deviceID)
+        farmId = shambaService.getDefaultFarmID(farmId);
+        String finalFarmId = farmId;
+        Page<Air> air_properties = airRepo.findByShamba_Id(farmId, pg).orElseThrow(
+                () -> new RuntimeException("No analytics found for device " + finalFarmId)
         );
         AirAnalytics airAnalytics = new AirAnalytics();
         air_properties.forEach(air -> {

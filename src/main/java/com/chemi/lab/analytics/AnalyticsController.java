@@ -14,7 +14,7 @@ public class AnalyticsController {
 
 
     @GetMapping("soil")
-    public SoilAnalytics getSoilAnalytics(@RequestParam String deviceID,
+    public SoilAnalytics getSoilAnalytics(@RequestParam(required = false) String deviceID,
                                           @RequestParam(name = "size",required = false) Integer size,
                                           @RequestParam(name = "farm",required = false) String farm,
                                           @RequestParam(name = "date",required = false) String date) {
@@ -22,7 +22,7 @@ public class AnalyticsController {
     }
 
     @GetMapping("air")
-    public AirAnalytics getAirAnalytics(@RequestParam String deviceID,
+    public AirAnalytics getAirAnalytics(@RequestParam(required = false) String deviceID,
                                          @RequestParam(name = "size",required = false) Integer size,
                                          @RequestParam(name = "farm",required = false) String farm,
                                          @RequestParam(name = "date",required = false) String date) {

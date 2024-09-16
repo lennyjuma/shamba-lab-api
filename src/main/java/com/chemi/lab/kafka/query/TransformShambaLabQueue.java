@@ -4,6 +4,8 @@ import com.chemi.lab.air.Air;
 import com.chemi.lab.battery.BatteryService;
 import com.chemi.lab.farm.Farm;
 import com.chemi.lab.gps.Gps;
+import com.chemi.lab.mkulima.farm.Shamba;
+import com.chemi.lab.mkulima.farm.ShambaService;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.shambaLab.ShambaLabService;
 import com.chemi.lab.soil.Soil;
@@ -22,19 +24,27 @@ import java.util.Map;
 public class TransformShambaLabQueue {
     private final BatteryService batteryService;;
     private final ShambaLabService shambaLabService;
+    private final ShambaService shambaService;
 
     public void transformShambaLabQueue(String queueMessage) {
         Map<String,Map<String,String>> shamba_lab = new HashMap<>();
         try {
             shamba_lab = new ObjectMapper().readValue(queueMessage,  new TypeReference<Map<String, Map<String, String>>>() {});
+            Map<String, String> farm_obj = shamba_lab.get("Farm");
+            String phone_number = farm_obj.get("Phone");
+            String shamba_name = farm_obj.get("Name");
+            Shamba shamba = getShambaByPhoneNumberAndName(phone_number, shamba_name);
+            System.out.println(shamba.toString());
             Air air = getAir(shamba_lab);
+            air.setShamba(shamba);
             Soil soil = getSoil(shamba_lab);
+            soil.setShamba(shamba);
             Gps gps = getGps(shamba_lab);
             Farm farm = getFarm(shamba_lab);
 
             ShambaLab shambaLab = new ShambaLab();
             shambaLab.setAir(air);
-            shambaLab.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
+            shambaLab.setDeviceId(farm_obj.get("deviceID"));
             shambaLab.setSoil(soil);
             shambaLab.setGps(gps);
             shambaLab.setFarm(farm);
@@ -51,6 +61,10 @@ public class TransformShambaLabQueue {
     private static LocalDateTime getReadingDate(String readingDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
         return LocalDateTime.parse(readingDate, formatter);
+    }
+
+    private Shamba getShambaByPhoneNumberAndName(String phoneNumber, String name){
+        return shambaService.fetchShambaByNameAndPhoneNUmber(phoneNumber, name);
     }
 
     private static Air getAir(Map<String, Map<String, String>> shamba_lab) {

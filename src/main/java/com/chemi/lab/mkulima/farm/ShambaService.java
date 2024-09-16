@@ -3,14 +3,11 @@ package com.chemi.lab.mkulima.farm;
 import com.chemi.lab.auth.config.SecurityContextMapper;
 import com.chemi.lab.auth.models.Customer;
 import com.chemi.lab.auth.repos.CustomerRepository;
-import com.chemi.lab.generics.GenericRepository;
-import com.chemi.lab.generics.GenericService;
 import com.chemi.lab.mkulima.crop.Crop;
 import com.chemi.lab.mkulima.crop.CropRepo;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,10 +48,24 @@ public class ShambaService {
         return saved_farm;
     }
 
-    public List<Shamba> fetchShambas() {
+    public List<Shamba> fetchShambasByCustomerId() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
-        return shambaRepo.findShambasByCustomer_Id(user_id).orElseThrow(
+        return shambaRepo.findShambasByCustomer_IdOrderByCreatedAtDesc(user_id).orElseThrow(
                 () -> new ResourceNotFoundException("Customer with id " + user_id + " not found")
+        );
+    }
+    public String getDefaultFarmID(String farmId) { // get default id when query param is null
+        if (farmId == null) {
+            List<Shamba> shambaList = fetchShambasByCustomerId();
+            farmId = shambaList.get(0).getId();
+        }
+        return farmId;
+    }
+    public Shamba fetchShambaByNameAndPhoneNUmber(String phoneNUmber, String name) {
+//        String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        return shambaRepo.findShambaByNameAndCustomer_PhoneNumber(name,phoneNUmber).orElseThrow(
+                //todo send mqtt to stm here
+                () -> new ResourceNotFoundException("Customer with id " + name + " not found")
         );
     }
 }

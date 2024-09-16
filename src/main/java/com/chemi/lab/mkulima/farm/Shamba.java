@@ -1,9 +1,12 @@
 package com.chemi.lab.mkulima.farm;
 
+import com.chemi.lab.air.Air;
 import com.chemi.lab.auth.models.Customer;
 import com.chemi.lab.generics.GenericEntity;
 import com.chemi.lab.gps.Gps;
 import com.chemi.lab.mkulima.crop.Crop;
+import com.chemi.lab.shambaLab.ShambaLab;
+import com.chemi.lab.soil.Soil;
 import com.chemi.lab.utils.PriKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -36,8 +39,17 @@ public class Shamba extends PriKey   implements Serializable, GenericEntity<Sham
     private List<Crop> crop;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "shamba")
+    private List<Soil> soilList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "shamba")
+    private List<Air> airList;
+
+    @JsonIgnore
     @ManyToOne
     private Customer customer;
+
 
     @Override
     public void update(Shamba source) {
