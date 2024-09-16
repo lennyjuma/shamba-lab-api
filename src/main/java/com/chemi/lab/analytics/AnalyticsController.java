@@ -14,18 +14,18 @@ public class AnalyticsController {
 
 
     @GetMapping("soil")
-    public SoilAnalytics getSoilAnalytics(@RequestParam(required = false) String deviceID,
+    public SoilAnalytics getSoilAnalytics(@RequestParam(required = false) String farm_id,
                                           @RequestParam(name = "size",required = false) Integer size,
                                           @RequestParam(name = "farm",required = false) String farm,
                                           @RequestParam(name = "date",required = false) String date) {
-        return analyticsService.getSoilAnalytics(deviceID,size);
+        return analyticsService.getSoilAnalytics(farm_id,size);
     }
 
     @GetMapping("air")
-    public AirAnalytics getAirAnalytics(@RequestParam(required = false) String deviceID,
+    public AirAnalytics getAirAnalytics(@RequestParam(required = false) String farm_id,
                                          @RequestParam(name = "size",required = false) Integer size,
                                          @RequestParam(name = "farm",required = false) String farm,
                                          @RequestParam(name = "date",required = false) String date) {
-        return analyticsService.getAirAnalytics(deviceID,size);
+        return analyticsService.getAirAnalytics(farm_id,size);
     }
 }
