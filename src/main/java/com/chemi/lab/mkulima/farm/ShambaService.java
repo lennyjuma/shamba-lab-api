@@ -51,7 +51,7 @@ public class ShambaService {
 
     public List<Shamba> fetchShambasByCustomerId() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
-        return shambaRepo.findShambasByCustomer_IdOrderByCreatedAtDesc(user_id).orElseThrow(
+        return shambaRepo.findShambasByCustomer_IdOrderByCreatedAtAsc(user_id).orElseThrow(
                 () -> new ApiResourceNotFoundException("Customer with id " + user_id + " not found")
         );
     }
