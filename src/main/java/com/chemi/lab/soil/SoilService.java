@@ -1,5 +1,6 @@
 package com.chemi.lab.soil;
 
+import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.generics.GenericService;
 import com.chemi.lab.mkulima.farm.ShambaService;
@@ -23,7 +24,7 @@ public class SoilService extends GenericService<Soil> {
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;
         return soilRepository.findByShamba_Id(farmId,  pg).orElseThrow(
-                () -> new RuntimeException("No Soil data found for device_id: " + finalFarmId));
+                () -> new ApiResourceNotFoundException(String.format("Soil data for farm with id %s not found",finalFarmId)));
     }
 
 
@@ -31,6 +32,6 @@ public class SoilService extends GenericService<Soil> {
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;
         return soilRepository.findTopByShamba_IdOrderByCreatedAtDesc(farmId).orElseThrow(
-                () -> new RuntimeException("No Soil data found for device_id: " + finalFarmId));
+                () ->  new ApiResourceNotFoundException(String.format("Soil data for farm with id %s not found",finalFarmId)));
     }
 }

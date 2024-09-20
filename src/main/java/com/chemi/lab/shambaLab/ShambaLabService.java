@@ -1,5 +1,6 @@
 package com.chemi.lab.shambaLab;
 
+import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import com.chemi.lab.generics.GenericRepository;
 import com.chemi.lab.generics.GenericService;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,6 @@ public class ShambaLabService extends GenericService<ShambaLab> {
 
     public List<ShambaLab> getShambaLabByDeviceID(String deviceId) {
         return shambaLabRepo.findByDeviceId(deviceId).orElseThrow(
-                () -> new RuntimeException("No ShambaLab data found for device_id: " + deviceId));
+                () -> new ApiResourceNotFoundException("No ShambaLab data found for device_id: " + deviceId));
     }
 }

@@ -3,6 +3,7 @@ package com.chemi.lab.mkulima.farm;
 import com.chemi.lab.auth.config.SecurityContextMapper;
 import com.chemi.lab.auth.models.Customer;
 import com.chemi.lab.auth.repos.CustomerRepository;
+import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import com.chemi.lab.mkulima.crop.Crop;
 import com.chemi.lab.mkulima.crop.CropRepo;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
@@ -25,7 +26,7 @@ public class ShambaService {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
         Shamba farm = new Shamba();
         Customer customer = customerRepository.findById(user_id).orElseThrow(
-                () -> new ResourceNotFoundException("Customer with id "  + user_id + " not found")
+                () -> new ApiResourceNotFoundException("Customer with id "  + user_id + " not found")
         );
         farm.setCustomer(customer);
         farm.setStmName(customer.getPhoneNumber() + "_" + shamba.getName());
@@ -51,7 +52,7 @@ public class ShambaService {
     public List<Shamba> fetchShambasByCustomerId() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
         return shambaRepo.findShambasByCustomer_IdOrderByCreatedAtDesc(user_id).orElseThrow(
-                () -> new ResourceNotFoundException("Customer with id " + user_id + " not found")
+                () -> new ApiResourceNotFoundException("Customer with id " + user_id + " not found")
         );
     }
     public String getDefaultFarmID(String farmId) { // get default id when query param is null
