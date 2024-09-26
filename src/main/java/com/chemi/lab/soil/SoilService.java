@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SoilService extends GenericService<Soil> {
     private final SoilRepo soilRepository;
@@ -31,7 +33,8 @@ public class SoilService extends GenericService<Soil> {
     public Soil getLatestSoilByDeviceID(String farmId) {
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;
-        return soilRepository.findTopByShamba_IdOrderByCreatedAtDesc(farmId).orElseThrow(
-                () ->  new ApiResourceNotFoundException(String.format("Soil data for farm with id %s not found",finalFarmId)));
+        List<Soil> soils = soilRepository.findByShamba_IdOrderByCreatedAtDesc(farmId).orElseThrow(
+                () -> new ApiResourceNotFoundException(String.format("Soil data for farm with id %s not found", finalFarmId)));
+        return soils.get(0);
     }
 }

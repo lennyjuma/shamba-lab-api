@@ -21,7 +21,7 @@ public class ShambaController {
         return ResponseEntity.ok(shambaService.addShamba(shamba)) ;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Shamba>> fetchShambas() {
         return ResponseEntity.ok(shambaService.fetchShambasByCustomerId());
     }
