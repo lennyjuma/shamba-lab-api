@@ -20,8 +20,10 @@ public class SoilController extends GenericController<Soil> {
     @GetMapping("device")
     public Page<Soil> getSoilByDeviceID(@RequestParam(name = "farm_id", required = false) String farm_id,
                                         @RequestParam(name = "page") Integer page,
+                                        @RequestParam(name = "start", required = false) String start,
+                                        @RequestParam(name = "end", required = false) String end,
                                         @RequestParam(name = "size") Integer size) {
-        return soilService.getSoilByDeviceID(farm_id,page,size);
+        return soilService.getSoilByShambaIDAndRangeDate(farm_id,page,size,start,end);
     }
     @GetMapping("latest")
     public Soil getLatestSoilByDeviceID(@RequestParam(name = "farm_id", required = false) String farm_id) {

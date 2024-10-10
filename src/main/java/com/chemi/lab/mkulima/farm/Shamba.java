@@ -4,7 +4,9 @@ import com.chemi.lab.air.Air;
 import com.chemi.lab.auth.models.Customer;
 import com.chemi.lab.generics.GenericEntity;
 import com.chemi.lab.gps.Gps;
+import com.chemi.lab.mkulima.composite.FarmCrop;
 import com.chemi.lab.mkulima.crop.Crop;
+import com.chemi.lab.mkulima.crop.Crop_utils;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.soil.Soil;
 import com.chemi.lab.utils.PriKey;
@@ -17,6 +19,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -35,8 +38,11 @@ public class Shamba extends PriKey   implements Serializable, GenericEntity<Sham
     private FarmType farmingType;
     private String location;
 
+//    @JsonIgnore
     @OneToMany(mappedBy = "shamba")
-    private List<Crop> crop;
+    private List<FarmCrop> farmCrops = new ArrayList<>();
+    @Transient
+    private List<Crop> crops = Crop_utils.getCropList(this.farmCrops);
 
     @JsonIgnore
     @OneToMany(mappedBy = "shamba")

@@ -16,16 +16,16 @@ public class AnalyticsController {
     @GetMapping("soil")
     public SoilAnalytics getSoilAnalytics(@RequestParam(required = false) String farm_id,
                                           @RequestParam(name = "size",required = false) Integer size,
-                                          @RequestParam(name = "farm",required = false) String farm,
-                                          @RequestParam(name = "date",required = false) String date) {
-        return analyticsService.getSoilAnalytics(farm_id,size);
+                                          @RequestParam(name = "start", required = false) String start,
+                                          @RequestParam(name = "end", required = false) String end) {
+        return analyticsService.getSoilAnalytics(farm_id,size,start,end);
     }
 
     @GetMapping("air")
     public AirAnalytics getAirAnalytics(@RequestParam(required = false) String farm_id,
                                          @RequestParam(name = "size",required = false) Integer size,
-                                         @RequestParam(name = "farm",required = false) String farm,
-                                         @RequestParam(name = "date",required = false) String date) {
-        return analyticsService.getAirAnalytics(farm_id,size);
+                                        @RequestParam(name = "start", required = false) String start,
+                                        @RequestParam(name = "end", required = false) String end) {
+        return analyticsService.getAirAnalytics(farm_id,size,start,end);
     }
 }

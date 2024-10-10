@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +21,13 @@ public class AnalyticsService {
     private final ShambaService shambaService;
     private final AirRepo airRepo;
     private final DateFormater dateFormater;
-    public SoilAnalytics getSoilAnalytics( String farmId, Integer size) {
+    public SoilAnalytics getSoilAnalytics( String farmId, Integer size, String startDate, String endDate) {
         PageRequest pg = PageRequest.of(0,size);
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;
-        Page<Soil> soils = soilRepository.findByShamba_Id(farmId, pg).orElseThrow(
+        LocalDateTime start = dateFormater.rangeDate(startDate, "start");
+        LocalDateTime end = dateFormater.rangeDate(endDate, "end");
+        Page<Soil> soils = soilRepository.findByShamba_IdAndReadingDateBetweenOrderByCreatedAtDesc(farmId,start,end, pg).orElseThrow(
                 () -> new RuntimeException("No analytics found for device " + finalFarmId)
         );
         SoilAnalytics soilAnalytics = new SoilAnalytics();
@@ -46,8 +48,6 @@ public class AnalyticsService {
             soilAnalytics.getPH().setName("pH");
             soilAnalytics.getPH().getData().add(getParseInt(soil.getPH()));
             soilAnalytics.getCategories().add(dateFormater.formatDate(soil.getReadingDate()));
-
-
         });
 
             return soilAnalytics;
@@ -57,11 +57,13 @@ public class AnalyticsService {
         return new BigDecimal(val);
     }
 
-    public AirAnalytics getAirAnalytics(String farmId, Integer size) {
+    public AirAnalytics getAirAnalytics(String farmId, Integer size, String startDate, String endDate) {
         PageRequest pg = PageRequest.of(0,size);
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;
-        Page<Air> air_properties = airRepo.findByShamba_Id(farmId, pg).orElseThrow(
+        LocalDateTime start = dateFormater.rangeDate(startDate, "start");
+        LocalDateTime end = dateFormater.rangeDate(endDate, "end");
+        Page<Air> air_properties = airRepo.findByShamba_IdAndReadingDateBetweenOrderByCreatedAtDesc(farmId,start,end, pg).orElseThrow(
                 () -> new RuntimeException("No analytics found for device " + finalFarmId)
         );
         AirAnalytics airAnalytics = new AirAnalytics();

@@ -26,8 +26,10 @@ public class AirController extends GenericController<Air> {
     @GetMapping("device")
     public Page<Air> getAirDataBYDeviceData(@RequestParam(name = "farm_id",required = false) String farm_id,
                                             @RequestParam(name = "page") Integer page,
+                                            @RequestParam(name = "start", required = false) String start,
+                                            @RequestParam(name = "end", required = false) String end,
                                             @RequestParam(name = "size") Integer size) {
-        return airService.getAirByDeviceID(farm_id,page,size);
+        return airService.getAirByDeviceID(farm_id,page,size,start,end);
     }
     @GetMapping("latest")
     public Air getLatestAirByDeviceID(@RequestParam(name = "farm_id",required = false) String farm_id) {
