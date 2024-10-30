@@ -34,7 +34,7 @@ public class TransformShambaLabQueue {
             String phone_number = farm_obj.get("Phone");
             String shamba_name = farm_obj.get("Name");
             Shamba shamba = getShambaByPhoneNumberAndName(phone_number, shamba_name);
-            System.out.println(shamba.toString());
+            System.out.println("yeaaaaaaaaaaaaaaaah +++++++++++++ "+shamba.toString());
             Air air = getAir(shamba_lab);
             air.setShamba(shamba);
             Soil soil = getSoil(shamba_lab);

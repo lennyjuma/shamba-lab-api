@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +49,8 @@ public class AnalyticsService {
             soilAnalytics.getPH().setName("pH");
             soilAnalytics.getPH().getData().add(getParseInt(soil.getPH()));
             soilAnalytics.getCategories().add(dateFormater.formatDate(soil.getReadingDate()));
+            List<String> cropList = soil.getShamba().getFarmCrops().stream().map((farmCrop) -> farmCrop.getCrop().getName()).toList();
+            soilAnalytics.setCrops(cropList);
         });
 
             return soilAnalytics;
@@ -73,6 +76,8 @@ public class AnalyticsService {
             airAnalytics.getHumidity().setName("Nitrogen");
             airAnalytics.getHumidity().getData().add(getParseInt(air.getHumidity()));
             airAnalytics.getCategories().add(dateFormater.formatDate(air.getReadingDate()));
+            List<String> cropList = air.getShamba().getFarmCrops().stream().map((farmCrop) -> farmCrop.getCrop().getName()).toList();
+            airAnalytics.setCrops(cropList);
         });
         return airAnalytics;
     }

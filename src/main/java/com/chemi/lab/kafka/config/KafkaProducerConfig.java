@@ -1,5 +1,7 @@
 package com.chemi.lab.kafka.config;
 
+import com.chemi.lab.contact_us.ContactUs;
+import com.chemi.lab.kafka.serializer.ContactSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,13 +31,22 @@ public class KafkaProducerConfig {
     public ProducerFactory<String ,String > producerFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
+    @Bean
+    public ProducerFactory<String , ContactUs> producerFactoryContact(){
+        Map<String, Object> configs = producerConfig();
+        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ContactSerializer.class);
+
+        return new DefaultKafkaProducerFactory<>(configs);
+    }
 
 
     @Bean
-    public KafkaTemplate<String,String> kafkaTemplate(
-            ProducerFactory<String ,String > producerFactory
-    ){
-        return new KafkaTemplate<>(producerFactory);
+    public KafkaTemplate<String,String> kafkaTemplate(){
+        return new KafkaTemplate<>(producerFactory());
+    }
+    @Bean
+    public KafkaTemplate<String,ContactUs> kafkaTemplateContact(){
+        return new KafkaTemplate<>(producerFactoryContact());
     }
 
 }

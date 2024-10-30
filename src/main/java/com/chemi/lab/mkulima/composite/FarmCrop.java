@@ -14,7 +14,7 @@ public class FarmCrop {
     private FarmCropEmbeddable id;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @MapsId("shambaId")
     @JoinColumn(name = "shamba_id")
     private Shamba shamba;

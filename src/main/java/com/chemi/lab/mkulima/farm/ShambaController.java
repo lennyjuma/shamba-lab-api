@@ -1,5 +1,6 @@
 package com.chemi.lab.mkulima.farm;
 
+import com.chemi.lab.mkulima.farm.dto.ShambaBodyUpdateDto;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ShambaController {
     }
 
     @PutMapping
-    public ResponseEntity<Shamba> update(@RequestBody ShambaBodydto shamba,
+    public ResponseEntity<Shamba> update(@RequestBody ShambaBodyUpdateDto shamba,
                                          @RequestParam(name = "farmId") String farmId) {
         return ResponseEntity.ok(shambaService.updateShamba(shamba,farmId)) ;
     }

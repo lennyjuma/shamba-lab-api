@@ -22,5 +22,6 @@ public class SoilAnalytics {
     private Charts temperature = new Charts();
     private Charts pH = new Charts();
     private List<String> categories = new ArrayList<>();
+    private List<String> crops = new ArrayList<>();
 
 }

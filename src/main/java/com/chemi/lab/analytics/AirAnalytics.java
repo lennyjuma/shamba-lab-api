@@ -17,5 +17,6 @@ public class AirAnalytics {
     private Charts temp = new Charts();
     private Charts humidity = new Charts();
     private List<String> categories = new ArrayList<>();
+    private List<String> crops = new ArrayList<>();
 
 }

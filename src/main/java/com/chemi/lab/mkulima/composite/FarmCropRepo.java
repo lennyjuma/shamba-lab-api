@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 public interface FarmCropRepo extends JpaRepository<FarmCrop,FarmCropEmbeddable> {
+
+    void deleteByShamba_IdAndCrop_Id(String shamba_Id, String crop_Id);
 }
