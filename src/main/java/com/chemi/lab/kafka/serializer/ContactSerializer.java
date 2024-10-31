@@ -2,6 +2,7 @@ package com.chemi.lab.kafka.serializer;
 
 import com.chemi.lab.contact_us.ContactUs;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
@@ -18,6 +19,7 @@ public class ContactSerializer implements Serializer<ContactUs> {
     @Override
     public byte[] serialize(String topic, ContactUs data) {
         try {
+            objectMapper.registerModule(new JavaTimeModule());
             if (data == null) {
                 return null;
             }

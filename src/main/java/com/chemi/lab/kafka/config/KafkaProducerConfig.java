@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Configuration
 public class KafkaProducerConfig {
-    @Value("localhost:9092")
+    @Value("localhost:29092")
     private String bootstrapServer;
 
     public Map<String,Object> producerConfig(){
@@ -31,22 +31,27 @@ public class KafkaProducerConfig {
     public ProducerFactory<String ,String > producerFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
+
     @Bean
     public ProducerFactory<String , ContactUs> producerFactoryContact(){
         Map<String, Object> configs = producerConfig();
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ContactSerializer.class);
-
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
+    @Bean
+    public KafkaTemplate<String,String> kafkaTemplate(
+            ProducerFactory<String ,String > producerFactory
+    ){
+        return new KafkaTemplate<>(producerFactory);
+    }
 
     @Bean
-    public KafkaTemplate<String,String> kafkaTemplate(){
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String,ContactUs> kafkaTemplateContact(
+            ProducerFactory<String ,ContactUs > producerFactory
+    ){
+        return new KafkaTemplate<>(producerFactory);
     }
-    @Bean
-    public KafkaTemplate<String,ContactUs> kafkaTemplateContact(){
-        return new KafkaTemplate<>(producerFactoryContact());
-    }
+
 
 }
