@@ -29,6 +29,9 @@ public class ShambaService {
 
     public Shamba addShamba(ShambaBodydto shamba) {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        if (shambaRepo.findShambaByName(shamba.getName()).isPresent()){
+            throw new ApiResourceNotFoundException("Shamba with name " + shamba.getName() + " already exists");
+        }
         Shamba farm = new Shamba();
         Customer customer = customerRepository.findById(user_id).orElseThrow(
                 () -> new ApiResourceNotFoundException("Customer with id "  + user_id + " not found")
@@ -106,7 +109,7 @@ public class ShambaService {
         }
         return farmId;
     }
-    public Shamba fetchShambaByNameAndPhoneNUmber(String phoneNUmber, String name) {
+    public Shamba fetchShambaByNameAndPhoneNUmber( String name) {
 //        String user_id = securityContextMapper.getLoggedInCustomer().getId();
         return shambaRepo.findShambaByName(name).orElseThrow(
                 //todo send mqtt to stm here

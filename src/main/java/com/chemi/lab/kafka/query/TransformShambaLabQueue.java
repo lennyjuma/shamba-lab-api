@@ -33,7 +33,7 @@ public class TransformShambaLabQueue {
             Map<String, String> farm_obj = shamba_lab.get("Farm");
             String phone_number = farm_obj.get("Phone");
             String shamba_name = farm_obj.get("Name");
-            Shamba shamba = getShambaByPhoneNumberAndName(phone_number, shamba_name);
+            Shamba shamba = getShambaByPhoneNumberAndName( shamba_name);
             System.out.println("yeaaaaaaaaaaaaaaaah +++++++++++++ "+shamba.toString());
             Air air = getAir(shamba_lab);
             air.setShamba(shamba);
@@ -63,8 +63,8 @@ public class TransformShambaLabQueue {
         return LocalDateTime.parse(readingDate, formatter);
     }
 
-    private Shamba getShambaByPhoneNumberAndName(String phoneNumber, String name){
-        return shambaService.fetchShambaByNameAndPhoneNUmber(phoneNumber, name);
+    private Shamba getShambaByPhoneNumberAndName(String name){
+        return shambaService.fetchShambaByNameAndPhoneNUmber( name);
     }
 
     private static Air getAir(Map<String, Map<String, String>> shamba_lab) {
