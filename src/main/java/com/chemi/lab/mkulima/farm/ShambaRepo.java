@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface ShambaRepo extends GenericRepository<Shamba> {
     Optional<List<Shamba>> findShambasByCustomer_IdOrderByCreatedAtAsc(String user_id);
     Optional<Shamba> findShambaByStmName(String stm_name);
+    Optional<Shamba> findShambaByName(String shamba_name);
     Optional<Shamba> findShambaByNameAndCustomer_PhoneNumber(String p_number,String name);
 }

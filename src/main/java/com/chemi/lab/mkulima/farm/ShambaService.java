@@ -108,9 +108,9 @@ public class ShambaService {
     }
     public Shamba fetchShambaByNameAndPhoneNUmber(String phoneNUmber, String name) {
 //        String user_id = securityContextMapper.getLoggedInCustomer().getId();
-        return shambaRepo.findShambaByNameAndCustomer_PhoneNumber(name,phoneNUmber).orElseThrow(
+        return shambaRepo.findShambaByName(name).orElseThrow(
                 //todo send mqtt to stm here
-                () -> new ResourceNotFoundException("Customer with id " + name + " not found")
+                () -> new ResourceNotFoundException("Shamba  with name " + name + " not found")
         );
     }
 }
