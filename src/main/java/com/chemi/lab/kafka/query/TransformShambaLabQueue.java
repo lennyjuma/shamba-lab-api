@@ -72,7 +72,7 @@ public class TransformShambaLabQueue {
         air.setHumidity(shamba_lab.get("Air").get("Humidity"));
         air.setTemperature(shamba_lab.get("Air").get("Temperature"));
         air.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
-        air.setCrop(shamba_lab.get("Farm").get("Crop"));
+//        air.setCrop(shamba_lab.get("Farm").get("Crop"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
         air.setReadingDate(getReadingDate(readingDate));
         return air;
@@ -98,7 +98,7 @@ public class TransformShambaLabQueue {
         soil.setMoisture(shamba_lab.get("Soil").get("Moisture"));
         soil.setTemperature(shamba_lab.get("Soil").get("Temperature"));
         soil.setPH(shamba_lab.get("Soil").get("pH"));
-        soil.setCrop(shamba_lab.get("Farm").get("Crop"));
+//        soil.setCrop(shamba_lab.get("Farm").get("Crop"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
         soil.setReadingDate(getReadingDate(readingDate));
         soil.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
@@ -106,7 +106,7 @@ public class TransformShambaLabQueue {
     }
     private static Farm getFarm(Map<String, Map<String, String>> shamba_lab) {
         Farm farm = new Farm();
-        farm.setCrop(shamba_lab.get("Farm").get("Crop"));
+//        farm.setCrop(shamba_lab.get("Farm").get("Crop"));
         farm.setPhone(shamba_lab.get("Farm").get("Phone"));
         farm.setDeviceId(shamba_lab.get("Farm").get("deviceID"));
         String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
