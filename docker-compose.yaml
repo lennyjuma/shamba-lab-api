@@ -6,7 +6,7 @@ networks:
 
 services:
   app:
-    image: shamba_lab/v21
+    image: shamba_lab/v23
     ports:
       - 8081:8081
     restart: unless-stopped
