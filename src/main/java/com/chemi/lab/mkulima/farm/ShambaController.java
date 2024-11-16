@@ -28,6 +28,11 @@ public class ShambaController {
         return ResponseEntity.ok(shambaService.updateShamba(shamba,farmId)) ;
     }
 
+    @DeleteMapping
+    public void delete(@RequestParam(name = "farmId") String farmId) {
+        shambaService.deleteShamba(farmId);
+    }
+
     @GetMapping()
     public ResponseEntity<List<Shamba>> fetchShambas() {
         return ResponseEntity.ok(shambaService.fetchShambasByCustomerId());

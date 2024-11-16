@@ -116,4 +116,8 @@ public class ShambaService {
                 () -> new ResourceNotFoundException("Shamba  with name " + name + " not found")
         );
     }
+
+    public void deleteShamba(String farmId) {
+        shambaRepo.deleteById(farmId);
+    }
 }
