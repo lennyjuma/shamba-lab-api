@@ -60,6 +60,9 @@ public class TransformShambaLabQueue {
 
     private static LocalDateTime getReadingDate(String readingDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d HH:mm");
+        if (!readingDate.isEmpty()){
+            return LocalDateTime.now();
+        }
         return LocalDateTime.parse(readingDate, formatter);
     }
 
