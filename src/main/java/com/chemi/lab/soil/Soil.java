@@ -5,6 +5,7 @@ import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -37,7 +38,7 @@ public class Soil extends PriKey  implements Serializable, GenericEntity<Soil> {
     private Shamba shamba;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "soil")
+    @OneToOne(mappedBy = "soil",cascade = CascadeType.ALL)
     private ShambaLab shambaLab;
 
     @Override

@@ -6,6 +6,7 @@ import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.utils.PriKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
@@ -27,7 +28,7 @@ public class Farm extends PriKey  implements Serializable, GenericEntity<Farm> {
     private String deviceId;
 
 
-    @OneToOne(mappedBy = "farm")
+    @OneToOne(mappedBy = "farm", cascade = CascadeType.ALL)
     private ShambaLab shambaLab;
 
     @Override

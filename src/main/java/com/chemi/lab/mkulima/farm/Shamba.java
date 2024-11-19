@@ -39,17 +39,17 @@ public class Shamba extends PriKey   implements Serializable, GenericEntity<Sham
     private String location;
 
 //    @JsonIgnore
-    @OneToMany(mappedBy = "shamba")
+    @OneToMany(mappedBy = "shamba", cascade = CascadeType.ALL)
     private List<FarmCrop> farmCrops = new ArrayList<>();
     @Transient
     private List<Crop> crops = Crop_utils.getCropList(this.farmCrops);
 
     @JsonIgnore
-    @OneToMany(mappedBy = "shamba")
+    @OneToMany(mappedBy = "shamba", cascade = CascadeType.ALL)
     private List<Soil> soilList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "shamba")
+    @OneToMany(mappedBy = "shamba", cascade = CascadeType.ALL)
     private List<Air> airList;
 
     @JsonIgnore

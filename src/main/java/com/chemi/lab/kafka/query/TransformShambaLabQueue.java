@@ -60,7 +60,7 @@ public class TransformShambaLabQueue {
 
     private static LocalDateTime getReadingDate(String readingDate){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d HH:mm");
-        if (!readingDate.isEmpty()){
+        if (readingDate.length() < 13){
             return LocalDateTime.now();
         }
         return LocalDateTime.parse(readingDate, formatter);
