@@ -1,0 +1,307 @@
+[[32mINFO [m] 2024-11-26 14:41:03,607 Version.<clinit>() - HV000001: Hibernate Validator 8.0.1.Final
+[[32mINFO [m] 2024-11-26 14:41:03,640 LabApplication.logStarting() - Starting LabApplication using Java 20.0.2.1 with PID 90146 (/home/maximus/Desktop/chemichemi/lab/target/classes started by maximus in /home/maximus/Desktop/chemichemi/lab)
+[[32mINFO [m] 2024-11-26 14:41:03,644 LabApplication.logStartupProfileInfo() - No active profile set, falling back to 1 default profile: "default"
+[[32mINFO [m] 2024-11-26 14:41:04,254 RepositoryConfigurationDelegate.registerRepositoriesIn() - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[[32mINFO [m] 2024-11-26 14:41:04,315 RepositoryConfigurationDelegate.registerRepositoriesIn() - Finished Spring Data repository scanning in 55 ms. Found 11 JPA repository interfaces.
+[[32mINFO [m] 2024-11-26 14:41:04,999 TomcatWebServer.initialize() - Tomcat initialized with port 8087 (http)
+[[32mINFO [m] 2024-11-26 14:41:05,009 Http11NioProtocol.log() - Initializing ProtocolHandler ["http-nio-8087"]
+[[32mINFO [m] 2024-11-26 14:41:05,012 StandardService.log() - Starting service [Tomcat]
+[[32mINFO [m] 2024-11-26 14:41:05,012 StandardEngine.log() - Starting Servlet engine: [Apache Tomcat/10.1.25]
+[[32mINFO [m] 2024-11-26 14:41:05,048 [/].log() - Initializing Spring embedded WebApplicationContext
+[[32mINFO [m] 2024-11-26 14:41:05,049 ServletWebServerApplicationContext.prepareWebApplicationContext() - Root WebApplicationContext: initialization completed in 1376 ms
+[[32mINFO [m] 2024-11-26 14:41:05,258 LogHelper.logPersistenceUnitInformation() - HHH000204: Processing PersistenceUnitInfo [name: default]
+[[32mINFO [m] 2024-11-26 14:41:05,301 Version.logVersion() - HHH000412: Hibernate ORM core version 6.5.2.Final
+[[32mINFO [m] 2024-11-26 14:41:05,329 RegionFactoryInitiator.initiateService() - HHH000026: Second-level cache disabled
+[[32mINFO [m] 2024-11-26 14:41:05,575 SpringPersistenceUnitInfo.addTransformer() - No LoadTimeWeaver setup: ignoring JPA class transformer
+[[32mINFO [m] 2024-11-26 14:41:05,596 HikariDataSource.getConnection() - HikariPool-1 - Starting...
+[[32mINFO [m] 2024-11-26 14:41:05,898 HikariPool.checkFailFast() - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62c6db99
+[[32mINFO [m] 2024-11-26 14:41:05,900 HikariDataSource.getConnection() - HikariPool-1 - Start completed.
+[[33mWARN [m] 2024-11-26 14:41:05,945 deprecation.constructDialect() - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[[32mINFO [m] 2024-11-26 14:41:07,131 JtaPlatformInitiator.initiateService() - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[[32mINFO [m] 2024-11-26 14:41:07,224 LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory() - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[[32mINFO [m] 2024-11-26 14:41:08,183 InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer.configure() - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+[[33mWARN [m] 2024-11-26 14:41:08,184 InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer.configure() - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+[[33mWARN [m] 2024-11-26 14:41:08,852 JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor() - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[[32mINFO [m] 2024-11-26 14:41:10,382 AdminClientConfig.logAll() - AdminClientConfig values: 
+	auto.include.jmx.reporter = true
+	bootstrap.controllers = []
+	bootstrap.servers = [localhost:29092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = 
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = true
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+[[32mINFO [m] 2024-11-26 14:41:10,425 AppInfoParser.<init>() - Kafka version: 3.7.0
+[[32mINFO [m] 2024-11-26 14:41:10,426 AppInfoParser.<init>() - Kafka commitId: 2ae524ed625438c5
+[[32mINFO [m] 2024-11-26 14:41:10,426 AppInfoParser.<init>() - Kafka startTimeMs: 1732621270424
+[[32mINFO [m] 2024-11-26 14:41:10,688 AppInfoParser.unregisterAppInfo() - App info kafka.admin.client for adminclient-1 unregistered
+[[32mINFO [m] 2024-11-26 14:41:10,693 Metrics.close() - Metrics scheduler closed
+[[32mINFO [m] 2024-11-26 14:41:10,693 Metrics.close() - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+[[32mINFO [m] 2024-11-26 14:41:10,693 Metrics.close() - Metrics reporters closed
+[[32mINFO [m] 2024-11-26 14:41:10,697 Http11NioProtocol.log() - Starting ProtocolHandler ["http-nio-8087"]
+[[32mINFO [m] 2024-11-26 14:41:10,705 TomcatWebServer.start() - Tomcat started on port 8087 (http) with context path '/'
+[[32mINFO [m] 2024-11-26 14:41:10,722 ConsumerConfig.logAll() - ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-groupId-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = groupId
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+[[32mINFO [m] 2024-11-26 14:41:10,747 KafkaMetricsCollector.init() - initializing Kafka metrics collector
+[[32mINFO [m] 2024-11-26 14:41:10,780 AppInfoParser.<init>() - Kafka version: 3.7.0
+[[32mINFO [m] 2024-11-26 14:41:10,780 AppInfoParser.<init>() - Kafka commitId: 2ae524ed625438c5
+[[32mINFO [m] 2024-11-26 14:41:10,780 AppInfoParser.<init>() - Kafka startTimeMs: 1732621270780
+[[32mINFO [m] 2024-11-26 14:41:10,783 LegacyKafkaConsumer.subscribeInternal() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Subscribed to topic(s): shamba_lab
+[[32mINFO [m] 2024-11-26 14:41:10,799 Metadata.update() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Cluster ID: GgASpRyjTxmLr1ii1H-pnw
+[[32mINFO [m] 2024-11-26 14:41:10,800 ConsumerCoordinator.onSuccess() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+[[32mINFO [m] 2024-11-26 14:41:10,800 LabApplication.logStarted() - Started LabApplication in 7.437 seconds (process running for 8.368)
+[[32mINFO [m] 2024-11-26 14:41:10,801 ConsumerCoordinator.sendJoinGroupRequest() - [Consumer clientId=consumer-groupId-1, groupId=groupId] (Re-)joining group
+[[32mINFO [m] 2024-11-26 14:41:10,811 ConsumerCoordinator.requestRejoin() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Request joining group due to: need to re-join with the given member-id: consumer-groupId-1-b39b94db-b743-4f91-bdb8-88c006b29112
+[[32mINFO [m] 2024-11-26 14:41:10,811 ConsumerCoordinator.sendJoinGroupRequest() - [Consumer clientId=consumer-groupId-1, groupId=groupId] (Re-)joining group
+[[32mINFO [m] 2024-11-26 14:41:13,816 ConsumerCoordinator.handle() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Successfully joined group with generation Generation{generationId=182, memberId='consumer-groupId-1-b39b94db-b743-4f91-bdb8-88c006b29112', protocol='range'}
+[[32mINFO [m] 2024-11-26 14:41:13,828 ConsumerCoordinator.onLeaderElected() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Finished assignment for group at generation 182: {consumer-groupId-1-b39b94db-b743-4f91-bdb8-88c006b29112=Assignment(partitions=[shamba_lab-0])}
+[[32mINFO [m] 2024-11-26 14:41:13,840 ConsumerCoordinator.handle() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Successfully synced group in generation Generation{generationId=182, memberId='consumer-groupId-1-b39b94db-b743-4f91-bdb8-88c006b29112', protocol='range'}
+[[32mINFO [m] 2024-11-26 14:41:13,842 ConsumerCoordinator.invokeOnAssignment() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Notifying assignor about the new Assignment(partitions=[shamba_lab-0])
+[[32mINFO [m] 2024-11-26 14:41:13,844 ConsumerRebalanceListenerInvoker.invokePartitionsAssigned() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Adding newly assigned partitions: shamba_lab-0
+[[32mINFO [m] 2024-11-26 14:41:13,867 ConsumerUtils.refreshCommittedOffsets() - Setting offset for partition shamba_lab-0 to the committed offset FetchPosition{offset=131, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:29092 (id: 1 rack: null)], epoch=0}}
+[[32mINFO [m] 2024-11-26 14:41:13,870 KafkaMessageListenerContainer.info() - groupId: partitions assigned: [shamba_lab-0]
+[[32mINFO [m] 2024-11-26 14:48:17,613 [/].log() - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[[32mINFO [m] 2024-11-26 14:48:17,613 DispatcherServlet.initServletBean() - Initializing Servlet 'dispatcherServlet'
+[[32mINFO [m] 2024-11-26 14:48:17,618 DispatcherServlet.initServletBean() - Completed initialization in 3 ms
+[[32mINFO [m] 2024-11-26 14:48:17,830 ControllerLoggerAspect.logRequestInfo() - Executing method: AirController.getLatestAirByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:48:17,831 ControllerLoggerAspect.logRequestInfo() - Executing method: SoilController.getLatestSoilByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:48:17,832 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/air/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:48:17,833 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/soil/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:48:17,835 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:48:17,836 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:48:17,837 SoilController.getLatestSoilByDeviceID() - get latest by device
+[[32mINFO [m] 2024-11-26 14:48:17,836 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestAirByDeviceID() method with params [null]
+[[1;31mERROR[m] 2024-11-26 14:48:17,838 SoilController.getLatestSoilByDeviceID() - get soil by device error
+[[32mINFO [m] 2024-11-26 14:48:17,839 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getAirAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:48:17,840 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getSoilAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:48:17,840 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestSoilByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:48:17,840 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/air with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:48:17,841 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:48:17,840 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/soil with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:48:17,841 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:48:17,842 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getAirAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:48:17,844 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getSoilAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:48:17,865 ServiceLoggerAspect.logAfterMethodExecution() - Completed getAirAnalytics() method with return value of  com.chemi.lab.analytics.AirAnalytics@74055981
+[[32mINFO [m] 2024-11-26 14:48:17,869 ServiceLoggerAspect.logAfterMethodExecution() - Completed getSoilAnalytics() method with return value of  SoilAnalytics(nitrogen=Charts(name=null, reading_date=null, data=[]), potassium=Charts(name=null, reading_date=null, data=[]), phosphorus=Charts(name=null, reading_date=null, data=[]), conductivity=Charts(name=null, reading_date=null, data=[]), moisture=Charts(name=null, reading_date=null, data=[]), temperature=Charts(name=null, reading_date=null, data=[]), pH=Charts(name=null, reading_date=null, data=[]), categories=[], crops=[])
+[[32mINFO [m] 2024-11-26 14:49:00,656 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getAirAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:49:00,657 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getSoilAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:49:00,656 ControllerLoggerAspect.logRequestInfo() - Executing method: AirController.getLatestAirByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:49:00,658 ControllerLoggerAspect.logRequestInfo() - Executing method: SoilController.getLatestSoilByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:49:00,659 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/air with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:00,659 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/air/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:00,659 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/soil/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:00,660 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/soil with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:00,661 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:00,661 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:00,661 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:00,661 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:00,661 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestAirByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:49:00,661 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getAirAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:49:00,662 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getSoilAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:49:00,662 SoilController.getLatestSoilByDeviceID() - get latest by device
+[[1;31mERROR[m] 2024-11-26 14:49:00,663 SoilController.getLatestSoilByDeviceID() - get soil by device error
+[[32mINFO [m] 2024-11-26 14:49:00,664 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestSoilByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:49:00,669 ServiceLoggerAspect.logAfterMethodExecution() - Completed getSoilAnalytics() method with return value of  SoilAnalytics(nitrogen=Charts(name=null, reading_date=null, data=[]), potassium=Charts(name=null, reading_date=null, data=[]), phosphorus=Charts(name=null, reading_date=null, data=[]), conductivity=Charts(name=null, reading_date=null, data=[]), moisture=Charts(name=null, reading_date=null, data=[]), temperature=Charts(name=null, reading_date=null, data=[]), pH=Charts(name=null, reading_date=null, data=[]), categories=[], crops=[])
+[[32mINFO [m] 2024-11-26 14:49:00,670 ServiceLoggerAspect.logAfterMethodExecution() - Completed getAirAnalytics() method with return value of  com.chemi.lab.analytics.AirAnalytics@819dbcd
+[[32mINFO [m] 2024-11-26 14:49:26,767 ControllerLoggerAspect.logRequestInfo() - Executing method: AirController.getLatestAirByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:49:26,767 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/air/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:26,767 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getAirAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:49:26,768 ControllerLoggerAspect.logRequestInfo() - Executing method: SoilController.getLatestSoilByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:49:26,768 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:26,768 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/soil/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:26,768 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestAirByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:49:26,769 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/air with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:26,769 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:26,769 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:26,769 SoilController.getLatestSoilByDeviceID() - get latest by device
+[[1;31mERROR[m] 2024-11-26 14:49:26,770 SoilController.getLatestSoilByDeviceID() - get soil by device error
+[[32mINFO [m] 2024-11-26 14:49:26,770 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestSoilByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:49:26,769 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getAirAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:49:26,774 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getSoilAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:49:26,775 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/soil with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:49:26,776 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:49:26,777 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getSoilAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:49:26,779 ServiceLoggerAspect.logAfterMethodExecution() - Completed getAirAnalytics() method with return value of  com.chemi.lab.analytics.AirAnalytics@7a96323c
+[[32mINFO [m] 2024-11-26 14:49:26,784 ServiceLoggerAspect.logAfterMethodExecution() - Completed getSoilAnalytics() method with return value of  SoilAnalytics(nitrogen=Charts(name=null, reading_date=null, data=[]), potassium=Charts(name=null, reading_date=null, data=[]), phosphorus=Charts(name=null, reading_date=null, data=[]), conductivity=Charts(name=null, reading_date=null, data=[]), moisture=Charts(name=null, reading_date=null, data=[]), temperature=Charts(name=null, reading_date=null, data=[]), pH=Charts(name=null, reading_date=null, data=[]), categories=[], crops=[])
+[[32mINFO [m] 2024-11-26 14:50:10,828 NetworkClient.handleDisconnections() - [Consumer clientId=consumer-groupId-1, groupId=groupId] Node -1 disconnected.
+[[32mINFO [m] 2024-11-26 14:50:57,655 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getSoilAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:50:57,655 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/soil with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:50:57,656 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:50:57,656 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getSoilAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:50:57,664 ControllerLoggerAspect.logRequestInfo() - Executing method: AirController.getLatestAirByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:50:57,664 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/air/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:50:57,665 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:50:57,665 ControllerLoggerAspect.logRequestInfo() - Executing method: AnalyticsController.getAirAnalytics(..)
+[[32mINFO [m] 2024-11-26 14:50:57,666 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestAirByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:50:57,667 ControllerLoggerAspect.logRequestInfo() - Executing method: SoilController.getLatestSoilByDeviceID(..)
+[[32mINFO [m] 2024-11-26 14:50:57,667 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/soil/latest with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:50:57,668 ServiceLoggerAspect.logAfterMethodExecution() - Completed getSoilAnalytics() method with return value of  SoilAnalytics(nitrogen=Charts(name=null, reading_date=null, data=[]), potassium=Charts(name=null, reading_date=null, data=[]), phosphorus=Charts(name=null, reading_date=null, data=[]), conductivity=Charts(name=null, reading_date=null, data=[]), moisture=Charts(name=null, reading_date=null, data=[]), temperature=Charts(name=null, reading_date=null, data=[]), pH=Charts(name=null, reading_date=null, data=[]), categories=[], crops=[])
+[[32mINFO [m] 2024-11-26 14:50:57,669 ControllerLoggerAspect.logRequestInfo() - Request Path: /api/analytics/air with HTTP method GET
+[[32mINFO [m] 2024-11-26 14:50:57,670 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:50:57,670 ControllerLoggerAspect.logRequestInfo() - Correlation ID: Not provided
+[[32mINFO [m] 2024-11-26 14:50:57,670 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getAirAnalytics() method with params [c0168697-3a89-42f7-8f94-e04f1c00c059, 5, null, null]
+[[32mINFO [m] 2024-11-26 14:50:57,671 SoilController.getLatestSoilByDeviceID() - get latest by device
+[[1;31mERROR[m] 2024-11-26 14:50:57,671 SoilController.getLatestSoilByDeviceID() - get soil by device error
+[[32mINFO [m] 2024-11-26 14:50:57,671 ServiceLoggerAspect.logBeforeMethodExecution() - Enter getLatestSoilByDeviceID() method with params [null]
+[[32mINFO [m] 2024-11-26 14:50:57,678 ServiceLoggerAspect.logAfterMethodExecution() - Completed getAirAnalytics() method with return value of  com.chemi.lab.analytics.AirAnalytics@45d1d7b

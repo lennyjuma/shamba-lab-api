@@ -1,9 +1,6 @@
 package com.chemi.lab.analytics;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.function.BiConsumer;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Charts {
     private String name;
     private String reading_date;
