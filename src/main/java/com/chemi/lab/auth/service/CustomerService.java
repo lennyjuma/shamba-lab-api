@@ -68,7 +68,7 @@ public class CustomerService {
         EmailVerify emailVerify = new EmailVerify();
         emailVerify.setEmail(saved.getEmail());
         emailVerify.setTo(saved.getEmail());
-        kafkaTemplate.send("verify_email",emailVerify);
+//        kafkaTemplate.send("verify_email",emailVerify);
         return AuthResponse.builder().token(jwtToken).build();
     }
 }
