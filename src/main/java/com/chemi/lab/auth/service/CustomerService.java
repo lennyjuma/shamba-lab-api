@@ -8,7 +8,9 @@ import com.chemi.lab.auth.dto.RegisterRequest;
 import com.chemi.lab.auth.models.Customer;
 import com.chemi.lab.auth.models.Role;
 import com.chemi.lab.auth.repos.CustomerRepository;
+import com.chemi.lab.kafka.data.outbound.EmailVerify;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,8 @@ public class CustomerService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    private final KafkaTemplate<String, EmailVerify> kafkaTemplate;
 
     public AuthResponse login(LoginRequest loginRequest) { //use auth manager bean to authenticate
         Authentication authenticate = authenticationManager.authenticate(
@@ -59,8 +63,12 @@ public class CustomerService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.ADMIN)
                 .build();
-        customerRepository.save(customer);
+        Customer saved = customerRepository.save(customer);
         String jwtToken = jwtService.generateToken(customer);
+        EmailVerify emailVerify = new EmailVerify();
+        emailVerify.setEmail(saved.getEmail());
+        emailVerify.setTo(saved.getEmail());
+        kafkaTemplate.send("verify_email",emailVerify);
         return AuthResponse.builder().token(jwtToken).build();
     }
 }
