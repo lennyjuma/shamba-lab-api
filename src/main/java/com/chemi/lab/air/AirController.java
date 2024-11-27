@@ -32,7 +32,7 @@ public class AirController extends GenericController<Air> {
         return airService.getAirByDeviceID(farm_id,page,size,start,end);
     }
     @GetMapping("latest")
-    public Air getLatestAirByDeviceID(@RequestParam(name = "farm_id",required = false) String farm_id) {
+    public Air getLatestAirByDeviceID(@RequestParam(name = "farm_id",required = false) String farm_id) throws Exception {
         return airService.getLatestAirByDeviceID(farm_id);
     }
 }

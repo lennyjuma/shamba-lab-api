@@ -22,7 +22,7 @@ public class AnalyticsService {
     private final ShambaService shambaService;
     private final AirRepo airRepo;
     private final DateFormater dateFormater;
-    public SoilAnalytics getSoilAnalytics( String farmId, Integer size, String startDate, String endDate) {
+    public SoilAnalytics getSoilAnalytics( String farmId, Integer size, String startDate, String endDate) throws Exception {
         PageRequest pg = PageRequest.of(0,size);
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;
@@ -60,7 +60,7 @@ public class AnalyticsService {
         return new BigDecimal(val);
     }
 
-    public AirAnalytics getAirAnalytics(String farmId, Integer size, String startDate, String endDate) {
+    public AirAnalytics getAirAnalytics(String farmId, Integer size, String startDate, String endDate) throws Exception {
         PageRequest pg = PageRequest.of(0,size);
         farmId = shambaService.getDefaultFarmID(farmId);
         String finalFarmId = farmId;

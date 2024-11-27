@@ -17,7 +17,7 @@ public class AnalyticsController {
     public SoilAnalytics getSoilAnalytics(@RequestParam(required = false) String farm_id,
                                           @RequestParam(name = "size",required = false) Integer size,
                                           @RequestParam(name = "start", required = false) String start,
-                                          @RequestParam(name = "end", required = false) String end) {
+                                          @RequestParam(name = "end", required = false) String end) throws Exception {
         return analyticsService.getSoilAnalytics(farm_id,size,start,end);
     }
 
@@ -25,7 +25,7 @@ public class AnalyticsController {
     public AirAnalytics getAirAnalytics(@RequestParam(required = false) String farm_id,
                                          @RequestParam(name = "size",required = false) Integer size,
                                         @RequestParam(name = "start", required = false) String start,
-                                        @RequestParam(name = "end", required = false) String end) {
+                                        @RequestParam(name = "end", required = false) String end) throws Exception {
         return analyticsService.getAirAnalytics(farm_id,size,start,end);
     }
 }

@@ -33,7 +33,7 @@ public class ControllerLoggerAspect {
     public void logRequestInfo(JoinPoint joinPoint) {
         // Get the method signature
         String methodName = joinPoint.getSignature().toShortString();
-        log.info("Executing method: {}", methodName);
+//        log.info("Executing method: {}", methodName);
 
         // Log the request path
         String requestPath = request.getRequestURI();
@@ -42,10 +42,10 @@ public class ControllerLoggerAspect {
         // Log headers
         AtomicReference<String> headers = new AtomicReference<>("");
         request.getHeaderNames().asIterator().forEachRemaining(header -> {
-                    headers.set(headers.get() + "\n" +  header + " -- " + request.getHeader(header));
+                    headers.set(headers.get() + "  " +  header + " -- " + request.getHeader(header));
                 }
         );
-        log.debug(" \n HEADERS {}",headers);
+        log.info("  Shamaba_HEADERS {}",headers.get());
 
         // Log correlation ID
         String correlationId = request.getHeader("X-Correlation-ID");
@@ -53,17 +53,6 @@ public class ControllerLoggerAspect {
             correlationId = "Not provided";
         }
         log.info("Correlation ID: {}", correlationId);
-
-        // Log method arguments
-//        Object[] args = joinPoint.getArgs();
-//        if (args.length > 0) {
-//            log.info("Method Arguments:");
-//            for (Object arg : args) {
-//                log.info("  - {}",arg);
-//            }
-//        } else {
-//            log.info("No arguments passed.");
-//        }
     }
 }
 

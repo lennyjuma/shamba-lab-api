@@ -105,6 +105,9 @@ public class ShambaService {
     public String getDefaultFarmID(String farmId) { // get default id when query param is null
         if (farmId == null) {
             List<Shamba> shambaList = fetchShambasByCustomerId();
+            if (shambaList.isEmpty()) {
+                throw new ApiResourceNotFoundException("You do not have any farms yet");
+            }
             farmId = shambaList.get(0).getId();
         }
         return farmId;
