@@ -71,9 +71,9 @@ public class AnalyticsService {
         );
         AirAnalytics airAnalytics = new AirAnalytics();
         air_properties.forEach(air -> {
-            airAnalytics.getTemp().setName("Nitrogen");
+            airAnalytics.getTemp().setName("Temperature");
             airAnalytics.getTemp().getData().add(getParseInt(air.getTemperature()));
-            airAnalytics.getHumidity().setName("Nitrogen");
+            airAnalytics.getHumidity().setName("Humidity");
             airAnalytics.getHumidity().getData().add(getParseInt(air.getHumidity()));
             airAnalytics.getCategories().add(dateFormater.formatDate(air.getReadingDate()));
             List<String> cropList = air.getShamba().getFarmCrops().stream().map((farmCrop) -> farmCrop.getCrop().getName()).toList();
