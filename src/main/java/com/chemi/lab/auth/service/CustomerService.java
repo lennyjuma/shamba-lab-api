@@ -8,6 +8,7 @@ import com.chemi.lab.auth.dto.RegisterRequest;
 import com.chemi.lab.auth.models.Customer;
 import com.chemi.lab.auth.models.Role;
 import com.chemi.lab.auth.repos.CustomerRepository;
+import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import com.chemi.lab.kafka.data.outbound.EmailVerify;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -63,6 +64,10 @@ public class CustomerService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.ADMIN)
                 .build();
+        boolean present = customerRepository.findByEmail(customer.getEmail()).isPresent();
+        if (present){
+            throw new ApiResourceNotFoundException("Email is taken, please login instead.");
+        }
         Customer saved = customerRepository.save(customer);
         String jwtToken = jwtService.generateToken(customer);
         EmailVerify emailVerify = new EmailVerify();
