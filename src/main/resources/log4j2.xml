@@ -18,15 +18,15 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
             </Policies>
         </RollingFile>
-        <Socket name="socket" host="localhost" port="9999" reconnectionDelayMillis="5000">
-            <PatternLayout pattern="${logStashPattern}"  />
-        </Socket>
+<!--        <Socket name="socket" host="localhost" port="9999" reconnectionDelayMillis="5000">-->
+<!--            <PatternLayout pattern="${logStashPattern}"  />-->
+<!--        </Socket>-->
     </Appenders>
     <Loggers>
         <Root level="info">
             <AppenderRef ref="console" />
             <AppenderRef ref="rollingFile"/>
-            <AppenderRef ref="socket"/>
+<!--            <AppenderRef ref="socket"/>-->
         </Root>
     </Loggers>
 </Configuration>

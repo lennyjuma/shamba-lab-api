@@ -21,7 +21,6 @@ public class ApiExceptionHandler {
                 badRequest,
                 ZonedDateTime.now(ZoneId.of("UTC"))
         );
-
         return ResponseEntity.status(badRequest).body(apiException);
     }
 
