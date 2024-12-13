@@ -20,7 +20,11 @@ public class NotificationService {
 
     public void sendSMS(Soil soil, String phone_number, Air air) {
         if (phone_number != null ) {
+
             if (phone_number.startsWith("0")){
+                if ( phone_number.length() != 10){
+                    throw new ApiResourceNotFoundException("phone number provided has less than 10 characters " + phone_number);
+                }
                 phone_number = "+254" +  phone_number.substring(1);
             } else if (phone_number.startsWith("254")){
                 phone_number = "+" +  phone_number;
@@ -28,7 +32,7 @@ public class NotificationService {
                 throw new ApiResourceNotFoundException("phone number provided is incorrect " + phone_number);
             }
         }else {
-            throw new ApiResourceNotFoundException("phone number is required for msm notification");
+            throw new ApiResourceNotFoundException("phone number is required for sms notification");
         }
         SoilResultSMSNotification smsNotification = new SoilResultSMSNotification();
         smsNotification.setFName(soil.getShamba().getCustomer().getF_name());
