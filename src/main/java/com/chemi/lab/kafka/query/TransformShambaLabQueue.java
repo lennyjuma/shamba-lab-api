@@ -25,6 +25,7 @@ public class TransformShambaLabQueue {
     private final BatteryService batteryService;;
     private final ShambaLabService shambaLabService;
     private final ShambaService shambaService;
+    private final NotificationService notificationService;
 
     public void transformShambaLabQueue(String queueMessage) {
         Map<String,Map<String,String>> shamba_lab = new HashMap<>();
@@ -34,7 +35,6 @@ public class TransformShambaLabQueue {
             String phone_number = farm_obj.get("Phone");
             String shamba_name = farm_obj.get("Name");
             Shamba shamba = getShambaByPhoneNumberAndName( shamba_name);
-            System.out.println("yeaaaaaaaaaaaaaaaah +++++++++++++ "+shamba.toString());
             Air air = getAir(shamba_lab);
             air.setShamba(shamba);
             Soil soil = getSoil(shamba_lab);
@@ -51,7 +51,10 @@ public class TransformShambaLabQueue {
             String readingDate = shamba_lab.get("GPS").get("Date") + " " + shamba_lab.get("GPS").get("Time");
             shambaLab.setReadingDate(getReadingDate(readingDate));
 
-            shambaLabService.create(shambaLab);
+            ShambaLab lab = shambaLabService.create(shambaLab);
+            notificationService.sendSMS(lab.getSoil(),phone_number,air); // send result sms notification
+
+
 
         }catch (Exception e){
             e.printStackTrace();
