@@ -2,8 +2,10 @@ package com.chemi.lab.kafka.config;
 
 import com.chemi.lab.contact_us.ContactUs;
 import com.chemi.lab.kafka.data.outbound.EmailVerify;
+import com.chemi.lab.kafka.data.outbound.SoilResultSMSNotification;
 import com.chemi.lab.kafka.serializer.ContactSerializer;
 import com.chemi.lab.kafka.serializer.EmailVerifySerializer;
+import com.chemi.lab.kafka.serializer.SMSNotificationSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +42,13 @@ public class KafkaProducerConfig {
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ContactSerializer.class);
         return new DefaultKafkaProducerFactory<>(configs);
     }
+
+    @Bean
+    public ProducerFactory<String , SoilResultSMSNotification> producerFactorySMSNotification(){
+        Map<String, Object> configs = producerConfig();
+        configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, SMSNotificationSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configs);
+    }
     @Bean
     public ProducerFactory<String , EmailVerify> producerFactoryVerifyEmail(){
         Map<String, Object> configs = producerConfig();
@@ -57,6 +66,12 @@ public class KafkaProducerConfig {
     @Bean
     public KafkaTemplate<String,ContactUs> kafkaTemplateContact(
             ProducerFactory<String ,ContactUs > producerFactory
+    ){
+        return new KafkaTemplate<>(producerFactory);
+    }
+    @Bean
+    public KafkaTemplate<String, SoilResultSMSNotification> kafkaTemplateSMSNotification(
+            ProducerFactory<String , SoilResultSMSNotification> producerFactory
     ){
         return new KafkaTemplate<>(producerFactory);
     }

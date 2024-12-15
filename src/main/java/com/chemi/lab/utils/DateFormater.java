@@ -17,21 +17,16 @@ public class DateFormater {
         return date.format(formatter);
     }
     public  LocalDateTime rangeDate(String dateString,String startOrEnd) {
-        System.out.println(dateString + " " + startOrEnd);
-        System.out.println("date string +++++++++++++++++++++++" + dateString);
         if (Objects.isNull(dateString)) { //hardcode date if date is empty
             if (startOrEnd.equals("start")){
                 return LocalDateTime.of(2022, Month.JANUARY, 1, 0, 0, 0);
             }
             if (startOrEnd.equals("end")){
-                System.out.println("hereeee" + dateString);
                 return LocalDateTime.now();
             }
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy H:m");
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        System.out.println(dateTime + " date");
-        return dateTime;
+        return LocalDateTime.parse(dateString, formatter);
     }
 
 }
