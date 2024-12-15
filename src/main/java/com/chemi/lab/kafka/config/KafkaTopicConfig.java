@@ -15,4 +15,8 @@ public class KafkaTopicConfig {
     public NewTopic emailVerifyUsNotificationTopic(){
         return TopicBuilder.name("verify_email").build();
     }
+    @Bean
+    public NewTopic smsNotificationTopic(){
+        return TopicBuilder.name("sms-notification").build();
+    }
 }
