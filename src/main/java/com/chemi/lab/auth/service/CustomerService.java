@@ -10,6 +10,7 @@ import com.chemi.lab.auth.models.Role;
 import com.chemi.lab.auth.repos.CustomerRepository;
 import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import com.chemi.lab.kafka.data.outbound.EmailVerify;
+import com.chemi.lab.otp.OneTimePassword;
 import com.chemi.lab.otp.OneTimePasswordService;
 import com.chemi.lab.utils.EmailValidator;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,9 +44,9 @@ public class CustomerService {
 
         log.info("+++++++++++++++++++++++++++++++++ ");
         if (authenticate.isAuthenticated()){
-            System.out.println("oooutttt!");
+            System.out.println("user authenticated");
         }else {
-            log.info("+++++++++++++++++++++++++++++++++ ");
+            log.info("Not authenticated");
             throw new ApiResourceNotFoundException("Invalid email or password");
         }
         var customer = customerRepository.findByEmail(loginRequest.getEmail()).orElseThrow(
@@ -84,12 +84,13 @@ public class CustomerService {
         if (present){
             throw new ApiResourceNotFoundException("Email is taken, please login instead.");
         }
-        Customer saved = customerRepository.save(customer);
+        Customer saved_customer = customerRepository.save(customer);
         String jwtToken = jwtService.generateToken(customer);
         EmailVerify emailVerify = new EmailVerify();
-        emailVerify.setOtp(otpService.returnOneTimePassword().getOneTimePasswordCode().toString());
-        emailVerify.setEmail(saved.getEmail());
-        emailVerify.setTo(saved.getEmail());
+        OneTimePassword otp = otpService.generateOneTimePassword(saved_customer.getId());
+        emailVerify.setOtp(otp.getOneTimePasswordCode().toString());
+        emailVerify.setEmail(saved_customer.getEmail());
+        emailVerify.setTo(saved_customer.getEmail());
         kafkaTemplate.send("verify_email",emailVerify);
         return AuthResponse.builder().token(jwtToken).build();
     }
