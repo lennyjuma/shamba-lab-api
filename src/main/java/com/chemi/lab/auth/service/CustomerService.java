@@ -87,7 +87,7 @@ public class CustomerService {
         Customer saved_customer = customerRepository.save(customer);
         String jwtToken = jwtService.generateToken(customer);
         EmailVerify emailVerify = new EmailVerify();
-        OneTimePassword otp = otpService.generateOneTimePassword(saved_customer.getId());
+        OneTimePassword otp = otpService.generateOneTimePassword(saved_customer.getId(),customer.getPhoneNumber());
         emailVerify.setOtp(otp.getOneTimePasswordCode().toString());
         emailVerify.setOtp_id(otp.getId());
         emailVerify.setEmail(saved_customer.getEmail());

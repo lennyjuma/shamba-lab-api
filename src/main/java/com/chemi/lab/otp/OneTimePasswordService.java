@@ -2,6 +2,8 @@ package com.chemi.lab.otp;
 
 import com.chemi.lab.auth.config.SecurityContextMapper;
 import com.chemi.lab.exceptions.ApiResourceNotFoundException;
+import com.chemi.lab.kafka.data.outbound.SMSOTP;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,7 +22,7 @@ public class OneTimePasswordService {
     private final KafkaTemplate<String,String> kafkaTemplate;
     private final SecurityContextMapper securityContextMapper;
 
-    public OneTimePassword generateOneTimePassword(String userID) {
+    public OneTimePassword generateOneTimePassword(String userID, String phone_number) {
         OneTimePassword otp = new OneTimePassword();
         otp.setOneTimePasswordCode(otpHelper.createRandomOneTimePassword().get());
         long expiryInterval_sms = 1000L *  60 * 5 ; // 5 minutes
@@ -32,7 +34,18 @@ public class OneTimePasswordService {
         otp.setUserId(userID);
         otp.setEmailOTPVerified(Boolean.FALSE);
         otp.setSmsOTPVerified(Boolean.FALSE);
-        kafkaTemplate.send("sms-otp", otp.getOneTimePasswordCode().toString()); // send sms otp
+        SMSOTP smsotp = new SMSOTP();
+        smsotp.setOtp(otp.getOneTimePasswordCode().toString());
+        smsotp.setPhoneNumber(phone_number);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Convert Java object to JSON
+            var sms_otp = objectMapper.writeValueAsString(smsotp);
+            kafkaTemplate.send("sms-otp", sms_otp); // send sms otp
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return otpRepo.save(otp);
     }
 
@@ -76,8 +89,8 @@ public class OneTimePasswordService {
 
     public void generateOTP() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
-        OneTimePassword timePassword = generateOneTimePassword(user_id);
-        kafkaTemplate.send("sms-otp", timePassword.getOneTimePasswordCode().toString());
+//        OneTimePassword timePassword = generateOneTimePassword(user_id);
+//        kafkaTemplate.send("sms-otp", timePassword.getOneTimePasswordCode().toString());
 
 
     }
