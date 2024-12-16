@@ -4,6 +4,7 @@ import com.chemi.lab.auth.config.SecurityContextMapper;
 import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class OneTimePasswordService {
     private final OneTimePasswordHelper otpHelper;
     private final OneTimePasswordRepo otpRepo;
+    private final KafkaTemplate<String,String> kafkaTemplate;
     private final SecurityContextMapper securityContextMapper;
 
     public OneTimePassword generateOneTimePassword(String userID) {
@@ -34,20 +36,43 @@ public class OneTimePasswordService {
     }
 
 
-    public void verifyOTP(String otp, String channel) {
+    public void verifySMSOTP(String otp_code) {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
 
-        OneTimePassword timePassword = otpRepo.findOneTimePasswordByUserIdAndOneTimePasswordCode(user_id, Integer.valueOf(otp)).orElseThrow(
+        OneTimePassword otp = otpRepo.findOneTimePasswordByUserIdAndOneTimePasswordCode(user_id, Integer.valueOf(otp_code)).orElseThrow(
                 () -> new ApiResourceNotFoundException("OTP code incorrect.")
         );
-        Date emailOtpExpires = timePassword.getEmailOtpExpires();
-        Date smsOtpExpires = timePassword.getSmsOtpExpires();
-        long lapsed_email_time = Math.abs(System.currentTimeMillis() -  emailOtpExpires.getTime());
+        Date smsOtpExpires = otp.getSmsOtpExpires();
         long lapsed_sms_time =  Math.abs(System.currentTimeMillis() -  smsOtpExpires.getTime());
-        channelChoice(channel, lapsed_email_time, lapsed_sms_time,timePassword);
+        long elapsed_minutes = lapsed_sms_time / (1000L * 60 );
+        if(elapsed_minutes > 5L){ //this is in minutes
+            throw new ApiResourceNotFoundException("SMS OTP code expired.");
+        }
+        if(otp.getSmsOTPVerified()){ // check if already verified
+            throw new ApiResourceNotFoundException("Phone number already verified.");
+        }
+        otp.setSmsOTPVerified(Boolean.TRUE);
+        otpRepo.save(otp);
 
     }
+    public void verifyEmailOTP(String otp_id) {
+        OneTimePassword otp = otpRepo.findById(otp_id).orElseThrow(
+                () -> new ApiResourceNotFoundException("OTP code not registered.")
+        );
+        Date emailOtpExpires = otp.getEmailOtpExpires();
+        long lapsed_email_time =  Math.abs(System.currentTimeMillis() -  emailOtpExpires.getTime());
+        long elapsed_hours = lapsed_email_time / (1000L * 60 * 60);
+        if(elapsed_hours > 24L){
+            throw new ApiResourceNotFoundException("email token expired.");
+        }
+        if(otp.getEmailOTPVerified() == Boolean.TRUE){
+            throw new ApiResourceNotFoundException("email already verified.");
+        }
+        otp.setEmailOTPVerified(Boolean.TRUE);
+        otpRepo.save(otp);
 
+    }
+/*
     private  void channelChoice(String channel, long lapsed_email_time, long lapsed_sms_time, OneTimePassword otp) {
         if(Objects.equals(channel, "email")){
             long elapsed_hours = lapsed_email_time / (1000L * 60 * 60);
@@ -73,5 +98,13 @@ public class OneTimePasswordService {
             otp.setSmsOTPVerified(Boolean.TRUE);
             otpRepo.save(otp);
         }
+    }*/
+
+    public void generateOTP() {
+        String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        OneTimePassword timePassword = generateOneTimePassword(user_id);
+        kafkaTemplate.send("sms-otp", timePassword.getOneTimePasswordCode().toString());
+
+
     }
 }

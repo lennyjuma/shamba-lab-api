@@ -89,8 +89,11 @@ public class CustomerService {
         EmailVerify emailVerify = new EmailVerify();
         OneTimePassword otp = otpService.generateOneTimePassword(saved_customer.getId());
         emailVerify.setOtp(otp.getOneTimePasswordCode().toString());
+        emailVerify.setOtp_id(otp.getId());
         emailVerify.setEmail(saved_customer.getEmail());
         emailVerify.setTo(saved_customer.getEmail());
+        emailVerify.setFName(saved_customer.getF_name());
+        emailVerify.setLName(saved_customer.getL_name());
         kafkaTemplate.send("verify_email",emailVerify);
         return AuthResponse.builder().token(jwtToken).build();
     }
