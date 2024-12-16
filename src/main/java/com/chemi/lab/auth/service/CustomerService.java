@@ -10,8 +10,10 @@ import com.chemi.lab.auth.models.Role;
 import com.chemi.lab.auth.repos.CustomerRepository;
 import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import com.chemi.lab.kafka.data.outbound.EmailVerify;
+import com.chemi.lab.otp.OneTimePasswordService;
 import com.chemi.lab.utils.EmailValidator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,12 +22,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final OneTimePasswordService otpService;
     private final AuthenticationManager authenticationManager;
 
     private final KafkaTemplate<String, EmailVerify> kafkaTemplate;
@@ -37,11 +41,16 @@ public class CustomerService {
                         loginRequest.getPassword()
                 ) //this authenticates the user and throws an error if they are wrong
         );// it killd the thread if credentials are wrong so the other code won't run
+
+        log.info("+++++++++++++++++++++++++++++++++ ");
         if (authenticate.isAuthenticated()){
             System.out.println("oooutttt!");
+        }else {
+            log.info("+++++++++++++++++++++++++++++++++ ");
+            throw new ApiResourceNotFoundException("Invalid email or password");
         }
         var customer = customerRepository.findByEmail(loginRequest.getEmail()).orElseThrow(
-                () -> new UsernameNotFoundException("Customer not registered!")
+                () -> new ApiResourceNotFoundException("Customer with not found : " + loginRequest.getEmail())
         );
         String jwtToken = jwtService.generateToken(customer);
         return AuthResponse.builder()
@@ -78,6 +87,7 @@ public class CustomerService {
         Customer saved = customerRepository.save(customer);
         String jwtToken = jwtService.generateToken(customer);
         EmailVerify emailVerify = new EmailVerify();
+        emailVerify.setOtp(otpService.returnOneTimePassword().getOneTimePasswordCode().toString());
         emailVerify.setEmail(saved.getEmail());
         emailVerify.setTo(saved.getEmail());
         kafkaTemplate.send("verify_email",emailVerify);

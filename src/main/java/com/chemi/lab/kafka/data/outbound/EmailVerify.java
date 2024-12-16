@@ -12,4 +12,6 @@ public class EmailVerify extends BaseMailRequest {
     private String email;
     private String fName;
     private String lName;
+    private String otp;
+
 }

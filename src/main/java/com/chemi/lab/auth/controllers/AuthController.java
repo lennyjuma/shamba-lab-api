@@ -7,7 +7,9 @@ import com.chemi.lab.auth.dto.LoginRequest;
 import com.chemi.lab.auth.dto.RegisterRequest;
 import com.chemi.lab.auth.mapper.LoggedInUserMapper;
 import com.chemi.lab.auth.service.CustomerService;
+import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
     private final CustomerService customerService;
     private final LoggedInUserMapper loggedInUserMapper;
@@ -35,7 +38,7 @@ public class AuthController {
         try {
             return ResponseEntity.ok(customerService.login(loginRequest));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ApiResourceNotFoundException("Email or password is incorrect");
         }
     }
     @PostMapping("/loggedInUser")

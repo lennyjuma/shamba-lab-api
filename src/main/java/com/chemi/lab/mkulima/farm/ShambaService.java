@@ -12,12 +12,14 @@ import com.chemi.lab.mkulima.crop.CropRepo;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodyUpdateDto;
 import com.chemi.lab.mkulima.farm.dto.ShambaBodydto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ShambaService {
@@ -97,10 +99,10 @@ public class ShambaService {
 
     public List<Shamba> fetchShambasByCustomerId() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
-        List<Shamba> shambas = shambaRepo.findShambasByCustomer_IdOrderByCreatedAtAsc(user_id).orElseThrow(
+        log.info("user_id: {}", user_id);
+        return shambaRepo.findShambasByCustomer_IdOrderByCreatedAtAsc(user_id).orElseThrow(
                 () -> new ApiResourceNotFoundException("Customer with id " + user_id + " not found")
         );
-        return shambas;
     }
     public String getDefaultFarmID(String farmId) { // get default id when query param is null
         if (farmId == null) {
