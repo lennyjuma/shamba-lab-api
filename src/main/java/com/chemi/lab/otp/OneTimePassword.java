@@ -17,9 +17,11 @@ public class OneTimePassword extends PriKey {
     @NonNull
     private Integer oneTimePasswordCode;
     @NonNull
-    private Date sms_otp_expires;
-    private Date email_otp_expires;
-    private String user_id;
+    private Date smsOtpExpires;
+    private Date emailOtpExpires;
+    private Boolean smsOTPVerified;
+    private Boolean emailOTPVerified;
+    private String userId;
 
 }
 

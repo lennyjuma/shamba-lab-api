@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public class OneTimePasswordHelper {
     private final static Integer LENGTH = 6;
 
-    public static Supplier<Integer> createRandomOneTimePassword() {
+    public  Supplier<Integer> createRandomOneTimePassword() {
         return () -> {
             Random random = new Random();
             StringBuilder oneTimePassword = new StringBuilder();

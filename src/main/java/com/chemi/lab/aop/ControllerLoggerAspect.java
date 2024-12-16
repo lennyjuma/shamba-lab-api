@@ -18,42 +18,42 @@ import java.util.concurrent.atomic.AtomicReference;
 //@Slf4j
 public class ControllerLoggerAspect {
 
-    private static final Logger log = LogManager.getLogger(ControllerLoggerAspect.class);
-    private final HttpServletRequest request;
-
-    public ControllerLoggerAspect(HttpServletRequest request) {
-        this.request = request;
-    }
-    @Pointcut("execution(* com.chemi.lab.*.*ontroller.*(..))")
-    private void publicControllerFromLoggingPackage() {
-    }
-
-
-    @Before(value = "publicControllerFromLoggingPackage()") // Pointcut for all methods in classes ending with "Service"
-    public void logRequestInfo(JoinPoint joinPoint) {
-        // Get the method signature
-        String methodName = joinPoint.getSignature().toShortString();
-//        log.info("Executing method: {}", methodName);
-
-        // Log the request path
-        String requestPath = request.getRequestURI();
-        log.info("Request Path: {} with HTTP method {}", requestPath , request.getMethod());
-
-        // Log headers
-        AtomicReference<String> headers = new AtomicReference<>("");
-        request.getHeaderNames().asIterator().forEachRemaining(header -> {
-                    headers.set(headers.get() + "  " +  header + " -- " + request.getHeader(header));
-                }
-        );
-        log.info("  Shamaba_HEADERS {}",headers.get());
-
-        // Log correlation ID
-        String correlationId = request.getHeader("X-Correlation-ID");
-        if (correlationId == null) {
-            correlationId = "Not provided";
-        }
-        log.info("Correlation ID: {}", correlationId);
-    }
+//    private static final Logger log = LogManager.getLogger(ControllerLoggerAspect.class);
+//    private final HttpServletRequest request;
+//
+//    public ControllerLoggerAspect(HttpServletRequest request) {
+//        this.request = request;
+//    }
+//    @Pointcut("execution(* com.chemi.lab.*.*ontroller.*(..))")
+//    private void publicControllerFromLoggingPackage() {
+//    }
+//
+//
+//    @Before(value = "publicControllerFromLoggingPackage()") // Pointcut for all methods in classes ending with "Service"
+//    public void logRequestInfo(JoinPoint joinPoint) {
+//        // Get the method signature
+//        String methodName = joinPoint.getSignature().toShortString();
+////        log.info("Executing method: {}", methodName);
+//
+//        // Log the request path
+//        String requestPath = request.getRequestURI();
+//        log.info("Request Path: {} with HTTP method {}", requestPath , request.getMethod());
+//
+//        // Log headers
+//        AtomicReference<String> headers = new AtomicReference<>("");
+//        request.getHeaderNames().asIterator().forEachRemaining(header -> {
+//                    headers.set(headers.get() + "  " +  header + " -- " + request.getHeader(header));
+//                }
+//        );
+//        log.info("  Shamaba_HEADERS {}",headers.get());
+//
+//        // Log correlation ID
+//        String correlationId = request.getHeader("X-Correlation-ID");
+//        if (correlationId == null) {
+//            correlationId = "Not provided";
+//        }
+//        log.info("Correlation ID: {}", correlationId);
+//    }
 }
 
 

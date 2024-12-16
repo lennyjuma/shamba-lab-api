@@ -17,25 +17,25 @@ import java.util.concurrent.atomic.AtomicReference;
 @Slf4j
 public class ServiceLoggerAspect {
 
-    private final HttpServletRequest request;
+//    private final HttpServletRequest request;
+//
+//    public ServiceLoggerAspect(HttpServletRequest request) {
+//        this.request = request;
+//    }
+//
+//    @Pointcut("execution(* com.chemi.lab.*.*ervice.*(..))")
+//    private void publicServiceFromLoggingPackage() {
+//    }
+//
+//    @Before(value = "publicServiceFromLoggingPackage()")
+//    public void logBeforeMethodExecution(JoinPoint joinPoint) {
+//        log.info("Enter {}() method with params {}", joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
+//    }
 
-    public ServiceLoggerAspect(HttpServletRequest request) {
-        this.request = request;
-    }
-
-    @Pointcut("execution(* com.chemi.lab.*.*ervice.*(..))")
-    private void publicServiceFromLoggingPackage() {
-    }
-
-    @Before(value = "publicServiceFromLoggingPackage()")
-    public void logBeforeMethodExecution(JoinPoint joinPoint) {
-        log.info("Enter {}() method with params {}", joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
-    }
-
-    @AfterReturning(value = "publicServiceFromLoggingPackage()", returning = "result")
-    public void logAfterMethodExecution(JoinPoint joinPoint, Object result) {
-        log.info("Completed {}() method with return value of  {}", joinPoint.getSignature().getName(), result.toString());
-    }
+//    @AfterReturning(value = "publicServiceFromLoggingPackage()", returning = "result")
+//    public void logAfterMethodExecution(JoinPoint joinPoint, Object result) {
+//        log.info("Completed {}() method with return value of  {}", joinPoint.getSignature().getName(), result.toString());
+//    }
 }
 
 
