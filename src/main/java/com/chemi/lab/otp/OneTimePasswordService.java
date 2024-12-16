@@ -32,6 +32,7 @@ public class OneTimePasswordService {
         otp.setUserId(userID);
         otp.setEmailOTPVerified(Boolean.FALSE);
         otp.setSmsOTPVerified(Boolean.FALSE);
+        kafkaTemplate.send("sms-otp", otp.getOneTimePasswordCode().toString()); // send sms otp
         return otpRepo.save(otp);
     }
 
@@ -72,33 +73,6 @@ public class OneTimePasswordService {
         otpRepo.save(otp);
 
     }
-/*
-    private  void channelChoice(String channel, long lapsed_email_time, long lapsed_sms_time, OneTimePassword otp) {
-        if(Objects.equals(channel, "email")){
-            long elapsed_hours = lapsed_email_time / (1000L * 60 * 60);
-            if(elapsed_hours > 24L){
-                throw new ApiResourceNotFoundException("email token expired.");
-            }
-            log.info("getEmailOTPVerified {}", otp.getEmailOTPVerified());
-            if(otp.getEmailOTPVerified() == Boolean.TRUE){
-                throw new ApiResourceNotFoundException("email already verified.");
-            }
-            otp.setEmailOTPVerified(Boolean.TRUE);
-            otpRepo.save(otp);
-            
-        }
-        else if(Objects.equals(channel, "sms")){
-            long elapsed_minutes = lapsed_sms_time / (1000L * 60 );
-            if(elapsed_minutes > 5L){ //this is in minutes
-                throw new ApiResourceNotFoundException("SMS OTP code expired.");
-            }
-            if(otp.getSmsOTPVerified()){ // check if already verified
-                throw new ApiResourceNotFoundException("Phone number already verified.");
-            }
-            otp.setSmsOTPVerified(Boolean.TRUE);
-            otpRepo.save(otp);
-        }
-    }*/
 
     public void generateOTP() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();

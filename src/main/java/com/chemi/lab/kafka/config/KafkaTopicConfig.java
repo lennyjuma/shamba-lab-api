@@ -13,7 +13,7 @@ public class KafkaTopicConfig {
     }
     @Bean
     public NewTopic emailVerifyUsNotificationTopic(){
-        return TopicBuilder.name("verify_email").build();
+        return TopicBuilder.name("verify_email").partitions(2).build();
     }
     @Bean
     public NewTopic smsNotificationTopic(){
