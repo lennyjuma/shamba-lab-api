@@ -19,4 +19,8 @@ public class KafkaTopicConfig {
     public NewTopic smsNotificationTopic(){
         return TopicBuilder.name("sms-notification").build();
     }
+    @Bean
+    public NewTopic smsOTPTopic(){
+        return TopicBuilder.name("sms-otp").build();
+    }
 }

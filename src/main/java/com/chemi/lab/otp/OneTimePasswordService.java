@@ -4,6 +4,7 @@ import com.chemi.lab.auth.config.SecurityContextMapper;
 import com.chemi.lab.exceptions.ApiResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class OneTimePasswordService {
     private final OneTimePasswordHelper otpHelper;
     private final OneTimePasswordRepo otpRepo;
+    private final KafkaTemplate<String,String> kafkaTemplate;
     private final SecurityContextMapper securityContextMapper;
 
     public OneTimePassword generateOneTimePassword(String userID) {
@@ -73,5 +75,13 @@ public class OneTimePasswordService {
             otp.setSmsOTPVerified(Boolean.TRUE);
             otpRepo.save(otp);
         }
+    }
+
+    public void generateOTP() {
+        String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        OneTimePassword timePassword = generateOneTimePassword(user_id);
+        kafkaTemplate.send("sms-otp", timePassword.getOneTimePasswordCode().toString());
+
+
     }
 }

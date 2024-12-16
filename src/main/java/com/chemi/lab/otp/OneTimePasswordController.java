@@ -16,12 +16,18 @@ public class OneTimePasswordController {
 
     private final OneTimePasswordService oneTimePasswordService;
 
-    @PostMapping
+    @PostMapping("verify")
     public ResponseEntity<String> verifyOTP(@RequestParam("otp") String otp,
                                     @RequestParam("channel") String channel
     ) {
         oneTimePasswordService.verifyOTP(otp,channel);
         return new ResponseEntity<>("OTP verified", HttpStatus.OK);
+    }
+
+    @PostMapping("generate")
+    public ResponseEntity<String> RegenerateOTP() {
+        oneTimePasswordService.generateOTP();
+        return new ResponseEntity<>("OTP Generated", HttpStatus.OK);
     }
 
 }
