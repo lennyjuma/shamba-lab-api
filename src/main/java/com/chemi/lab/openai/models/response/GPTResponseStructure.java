@@ -1,6 +1,5 @@
 package com.chemi.lab.openai.models.response;
 
-import com.chemi.lab.utils.PriKey;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,13 +11,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class GPTResponse {
+public class GPTResponseStructure {
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
     private String crop;
     @Embedded
     private SoilProperties soilProperties;
@@ -28,4 +22,15 @@ public class GPTResponse {
     //private SummaryConfig summary;
     @Embedded
     private FertilizerRecommendation fertilizer_recommendation;
+
+    public  GPTResponse  returnGPTResponse () {
+
+        GPTResponse gptResponse = new GPTResponse();
+        gptResponse.setCrop(this.crop);
+        gptResponse.setSoilProperties(this.soilProperties);
+        gptResponse.setSummary(this.summary);
+        gptResponse.setFertilizer_recommendation(this.fertilizer_recommendation);
+
+        return gptResponse;
+    }
 }

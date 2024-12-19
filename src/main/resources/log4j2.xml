@@ -25,8 +25,11 @@
     <Loggers>
         <Root level="info">
             <AppenderRef ref="console" />
-            <AppenderRef ref="rollingFile"/>
+<!--            <AppenderRef ref="rollingFile"/>-->
 <!--            <AppenderRef ref="socket"/>-->
         </Root>
+        <Logger name="org.example" level="DEBUG">
+            <AppenderRef ref="console"/>
+        </Logger>
     </Loggers>
 </Configuration>

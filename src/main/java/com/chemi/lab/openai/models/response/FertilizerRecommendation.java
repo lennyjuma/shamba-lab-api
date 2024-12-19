@@ -1,5 +1,6 @@
 package com.chemi.lab.openai.models.response;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Embeddable
 public class FertilizerRecommendation {
     private String ideal_type_of_fertilizer;
     private String suggested_nutrient_ratios;

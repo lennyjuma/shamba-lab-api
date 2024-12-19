@@ -1,6 +1,7 @@
 package com.chemi.lab.openai.controller;
 
 import com.chemi.lab.openai.models.response.GPTResponse;
+import com.chemi.lab.openai.models.response.GPTResponseDTO;
 import com.chemi.lab.openai.service.ChatClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
@@ -17,7 +18,7 @@ public class ChatClientController {
     private final ChatClientService chatClient;
 
     @GetMapping
-    public GPTResponse sendMessage() {
+    public GPTResponseDTO sendMessage() {
         return chatClient.callOpenai();
     }
 }

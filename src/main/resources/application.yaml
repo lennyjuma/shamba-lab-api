@@ -16,7 +16,7 @@ spring:
       chat:
         options:
           model: gpt-4o
-      api-key: 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
+      api-key: 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
   jta:
     enabled: false
   kafka:

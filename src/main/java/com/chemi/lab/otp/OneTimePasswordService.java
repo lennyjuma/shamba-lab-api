@@ -44,7 +44,7 @@ public class OneTimePasswordService {
             var sms_otp = objectMapper.writeValueAsString(smsotp);
             kafkaTemplate.send("sms-otp", sms_otp); // send sms otp
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ApiResourceNotFoundException(e.getMessage());
         }
         return otpRepo.save(otp);
     }
@@ -52,18 +52,20 @@ public class OneTimePasswordService {
 
     public void verifySMSOTP(String otp_code) {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
+        log.info("Verify SMS OTP for user " + user_id);
 
-        OneTimePassword otp = otpRepo.findOneTimePasswordByUserIdAndOneTimePasswordCode(user_id, Integer.valueOf(otp_code)).orElseThrow(
-                () -> new ApiResourceNotFoundException("OTP code incorrect.")
+        int oneTimePasswordCode = Integer.decode(otp_code);
+        OneTimePassword otp = otpRepo.findOneTimePasswordByUserIdAndOneTimePasswordCode(user_id, oneTimePasswordCode).orElseThrow(
+                () -> new ApiResourceNotFoundException("OTP code not recognised.")
         );
         Date smsOtpExpires = otp.getSmsOtpExpires();
         long lapsed_sms_time =  Math.abs(System.currentTimeMillis() -  smsOtpExpires.getTime());
         long elapsed_minutes = lapsed_sms_time / (1000L * 60 );
-        if(elapsed_minutes > 5L){ //this is in minutes
-            throw new ApiResourceNotFoundException("SMS OTP code expired.");
-        }
         if(otp.getSmsOTPVerified()){ // check if already verified
             throw new ApiResourceNotFoundException("Phone number already verified.");
+        }
+        if(elapsed_minutes > 5L){ //this is in minutes
+            throw new ApiResourceNotFoundException("SMS OTP code expired.");
         }
         otp.setSmsOTPVerified(Boolean.TRUE);
         otpRepo.save(otp);
@@ -89,7 +91,9 @@ public class OneTimePasswordService {
 
     public void generateOTP() {
         String user_id = securityContextMapper.getLoggedInCustomer().getId();
-//        OneTimePassword timePassword = generateOneTimePassword(user_id);
+        String phoneNumber = securityContextMapper.getLoggedInCustomer().getPhoneNumber();
+        System.out.println(user_id + " +* ** ++ ** ** " + phoneNumber);
+        OneTimePassword timePassword = generateOneTimePassword(user_id, phoneNumber);
 //        kafkaTemplate.send("sms-otp", timePassword.getOneTimePasswordCode().toString());
 
 
