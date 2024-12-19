@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("ai")
+@RequestMapping("api/ai")
 @RequiredArgsConstructor
 public class ChatClientController {
     private final ChatClientService chatClient;

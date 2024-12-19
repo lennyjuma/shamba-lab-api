@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static jdk.internal.org.jline.utils.Colors.s;
-
 @Slf4j
 @Service
 public class ChatClientService {
