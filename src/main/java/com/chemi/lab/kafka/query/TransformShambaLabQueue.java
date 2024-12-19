@@ -6,6 +6,7 @@ import com.chemi.lab.farm.Farm;
 import com.chemi.lab.gps.Gps;
 import com.chemi.lab.mkulima.farm.Shamba;
 import com.chemi.lab.mkulima.farm.ShambaService;
+import com.chemi.lab.openai.service.ChatClientService;
 import com.chemi.lab.shambaLab.ShambaLab;
 import com.chemi.lab.shambaLab.ShambaLabService;
 import com.chemi.lab.soil.Soil;
@@ -26,6 +27,7 @@ public class TransformShambaLabQueue {
     private final ShambaLabService shambaLabService;
     private final ShambaService shambaService;
     private final NotificationService notificationService;
+    private final ChatClientService chatClientService;
 
     public void transformShambaLabQueue(String queueMessage) {
         Map<String,Map<String,String>> shamba_lab = new HashMap<>();
@@ -53,6 +55,8 @@ public class TransformShambaLabQueue {
 
             ShambaLab lab = shambaLabService.create(shambaLab);
             notificationService.sendSMS(lab.getSoil(),phone_number,air); // send result sms notification
+
+            chatClientService.callOpenai(lab.getSoil());
 
 
 

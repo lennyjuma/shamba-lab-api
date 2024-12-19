@@ -19,6 +19,8 @@ public class GPTResponse {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+
+    private String soilReadingId;
     private String crop;
     @Embedded
     private SoilProperties soilProperties;
@@ -28,4 +30,11 @@ public class GPTResponse {
     //private SummaryConfig summary;
     @Embedded
     private FertilizerRecommendation fertilizer_recommendation;
+
+
+    public GPTResponse(String soilReadingId) {
+        this.soilReadingId = soilReadingId;
+    }
+
+
 }
